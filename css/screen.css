@@ -451,6 +451,91 @@ input::placeholder {
 #COMPONENTS
 \*------------------------------------*/
 
+.c-APOD {
+	max-width: 380px;
+	max-height: 385px;
+	overflow: hidden;
+}
+
+.c-picdiv {
+	border: 1px solid black;
+	border-radius: 53px;
+	width: 380px;
+	height: 575px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	flex-direction: column;
+	margin-top: 24px;
+	margin-bottom: 24px;
+}
+
+.c-popup-box {
+	width: 380px;
+	height: 475px;
+	border: 2px solid grey;
+	border-radius: 8px;
+	margin: 0 auto;
+	position: relative;
+	background-color: grey;
+	color: #000;
+	bottom: 50px;
+	text-align: start;
+}
+.c-discription {
+	overflow-x: scroll;
+	height: 200px;
+}
+.js-btn {
+	width: 350px;
+	height: 80px;
+	border-radius: 52px;
+	background-color: white;
+	font-size: 36px;
+	margin-bottom: 24px;
+}
+
+.c-closebtn {
+	order: 1;
+	display: flex;
+	flex-direction: row-reverse;
+}
+.c-openbtn {
+	position: relative;
+	left: 136px;
+	bottom: 16px;
+	z-index: 99; /* Make sure it does not overlap */
+	border: none; /* Remove borders */
+	outline: none; /* Remove outline */
+	background-color: lightgrey; /* Set a background color */
+	color: #e9ded1; /* Text color */
+	cursor: pointer; /* Add a mouse pointer on hover */
+	padding: 5px; /* Some padding */
+	padding-bottom: 0px;
+	box-shadow: 0px 0px 30px #e9ded1;
+	border-radius: 10px; /* Rounded corners */
+	font-size: 18px; /* Increase font size */
+}
+
+.c-hidden {
+	display: none;
+}
+.c-mainbody {
+	height: 100vh;
+	width: 100%;
+	flex-direction: row;
+	align-items: center;
+}
+
+@media (min-width: 1200px) {
+	.c-mainbody {
+		flex-direction: column;
+	}
+	.c-picdiv {
+		margin-right: 16px;
+	}
+}
+
 /*
     Component: Logo
     ---
@@ -577,6 +662,15 @@ input::placeholder {
 
 .u-text-sm {
 	font-size: 14px;
+}
+.u-text-rg {
+	font-size: 16px;
+}
+.u-text-xl {
+	font-size: 24px;
+}
+.u-text-xxl {
+	font-size: 36px;
 }
 
 /*
