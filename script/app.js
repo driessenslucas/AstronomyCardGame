@@ -9,7 +9,7 @@ const showData = function (jsonObject) {
 		console.log(jsonObject[i]);
 		html += `<div class="c-picdiv">
             <h1 class="c-title">${jsonObject[i].title}</h1>
-            <div class="c-APOD"><img class="c-img js-imgOTD" src="${jsonObject[i].hdurl}" alt="" /></div>
+            <div class="c-APOD"><img class="c-img js-imgOTD" src="${jsonObject[i].url}" alt="" /></div>
             <div class="c-popup-box c-hidden c-discription${i}">
                 <div class="o-layout">
                     <div class="c-closebtn o-layout__item u-1-of-2">
@@ -61,7 +61,7 @@ const showData = function (jsonObject) {
 };
 
 const getApi = function () {
-	let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=5`;
+	let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=10`;
 	handleData(url, showData);
 };
 

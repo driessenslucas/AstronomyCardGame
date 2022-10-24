@@ -468,6 +468,7 @@ input::placeholder {
 	flex-direction: column;
 	margin-top: 24px;
 	margin-bottom: 24px;
+	scroll-snap-align: center;
 }
 
 .c-popup-box {
@@ -525,6 +526,9 @@ input::placeholder {
 	width: 100%;
 	flex-direction: row;
 	align-items: center;
+	scroll-snap-type: mandatory;
+	scroll-snap-points-x: repeat(300px);
+	scroll-snap-type: y mandatory;
 }
 
 @media (min-width: 1200px) {
