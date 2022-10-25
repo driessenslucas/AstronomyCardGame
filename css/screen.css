@@ -450,11 +450,19 @@ input::placeholder {
 /*------------------------------------*\
 #COMPONENTS
 \*------------------------------------*/
+.o-container {
+	overflow-x: scroll;
+}
 
 .c-APOD {
 	max-width: 380px;
 	max-height: 385px;
 	overflow: hidden;
+}
+
+.js-imgBIG {
+	margin: 0 auto;
+	display: flex;
 }
 
 .c-picdiv {
@@ -470,6 +478,10 @@ input::placeholder {
 	margin-bottom: 24px;
 	scroll-snap-align: center;
 }
+.c-bigpic {
+	max-height: 600px;
+	margin: 0 auto;
+}
 
 .c-popup-box {
 	width: 380px;
@@ -478,7 +490,7 @@ input::placeholder {
 	border-radius: 8px;
 	margin: 0 auto;
 	position: relative;
-	background-color: grey;
+	background-color: white;
 	color: #000;
 	bottom: 50px;
 	text-align: start;

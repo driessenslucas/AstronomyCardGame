@@ -1,5 +1,11 @@
 let apiKey = '0wbfxSQ6gzlHNFmELg7orwZgf5cFqVzFALmBrvzH';
 
+const showBigImg = function (url) {
+	document.querySelector(
+		'.c-bigpic'
+	).innerHTML = `<img class="c-img 	" src="${url}" alt="" />`;
+};
+
 const showData = function (jsonObject) {
 	console.log(jsonObject);
 
@@ -9,7 +15,7 @@ const showData = function (jsonObject) {
 		console.log(jsonObject[i]);
 		html += `<div class="c-picdiv">
             <h1 class="c-title">${jsonObject[i].title}</h1>
-            <div class="c-APOD"><img class="c-img js-imgOTD" src="${jsonObject[i].url}" alt="" /></div>
+            <div class="c-APOD"><img class="c-img js-imgOTD js-imgOTD${i}" src="${jsonObject[i].url}" alt="" /></div>
             <div class="c-popup-box c-hidden c-discription${i}">
                 <div class="o-layout">
                     <div class="c-closebtn o-layout__item u-1-of-2">
@@ -79,9 +85,12 @@ const listenToClick = function () {
 		openbtns[i].addEventListener('click', function (e) {
 			let boxnr = `.c-discription${i}`;
 			let btnnr = `.c-btnnr${i}`;
+
+			let imgnr = `.js-imgOTD${i}`;
 			document.querySelector(`${boxnr}`).classList.remove('c-hidden');
 			console.log(boxnr);
 			document.querySelector(`${btnnr}`).classList.add('c-hidden');
+			showBigImg(document.querySelector(`${imgnr}`).src);
 		});
 	}
 	const closedbtns = document.querySelectorAll('.c-closebtn');
@@ -91,6 +100,7 @@ const listenToClick = function () {
 			let btnnr = `.c-btnnr${i}`;
 			document.querySelector(`${boxnr}`).classList.add('c-hidden');
 			document.querySelector(`${btnnr}`).classList.remove('c-hidden');
+			showBigImg('');
 		});
 	}
 };
