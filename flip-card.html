@@ -7,7 +7,7 @@
 		<title>Astrology photo of the day</title>
 		<script src="/script/app.js"></script>
 		<script src="/script/dataHandler.js"></script>
-		<link rel="stylesheet" href="/css/screencopy.css" />
+		<link rel="stylesheet" href="/css/screen.css" />
 		<link rel="stylesheet" href="/css/normalize.css" />
 	</head>
 	<body>
@@ -92,55 +92,45 @@
 				<circle cx="185" cy="245" r="2" />
 			</symbol>
 		</svg>
-		
-		<div class=" o-container o-layout o-layout--justify-center">
-			<div class="o-container c-chosen">
 
-				<div class="c-bigpic o-laytout o-layout--justify-center o-layout--align-center"">
+		<h1>Flip card to randomize it</h1>
 
+		<div class="card-container c-card flipped">
+			<div class="card">
+				<div class="front">
+					<svg viewBox="0 0 300 420">
+						<use xlink:href="#card-front" />
+						<text class="rank" x="53" y="51" text-anchor="middle"></text>
+						<text
+							class="rank"
+							x="247"
+							y="365"
+							text-anchor="middle"
+							transform="rotate(180, 247, 367)"
+						></text>
+						<use
+							class="suit"
+							xlink:href="#"
+							x="229"
+							y="29"
+							width="36"
+							height="45"
+						/>
+						<use
+							class="suit"
+							xlink:href="#"
+							x="35"
+							y="346"
+							width="36"
+							height="45"
+							transform="rotate(180, 53, 368.5)"
+						/>
+					</svg>
 				</div>
-			</div>
-			<div class="o-container">
-				<div class="c-cards o-layout o-layout--justify-center">
-					<div class="card-container">
-						<div class="card">
-							<div class="front">
-								<svg viewBox="0 0 300 420">
-									<use xlink:href="#card-front" />
-									<text class="rank" x="53" y="51" text-anchor="middle"></text>
-									<text
-										class="rank"
-										x="247"
-										y="365"
-										text-anchor="middle"
-										transform="rotate(180, 247, 367)"
-									></text>
-									<use
-										class="suit"
-										xlink:href="#"
-										x="229"
-										y="29"
-										width="36"
-										height="45"
-									/>
-									<use
-										class="suit"
-										xlink:href="#"
-										x="35"
-										y="346"
-										width="36"
-										height="45"
-										transform="rotate(180, 53, 368.5)"
-									/>
-								</svg>
-							</div>
-							<div class="back">
-								<svg viewBox="0 0 300 420">
-									<use xlink:href="#card-back" />
-								</svg>
-							</div>
-						</div>
-					</div>
+				<div class="back">
+					<svg viewBox="0 0 300 420">
+						<use xlink:href="#card-back" />
+					</svg>
 				</div>
 			</div>
 		</div>

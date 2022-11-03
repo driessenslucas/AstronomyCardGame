@@ -450,9 +450,6 @@ input::placeholder {
 /*------------------------------------*\
 #COMPONENTS
 \*------------------------------------*/
-.o-container {
-	overflow-x: scroll;
-}
 
 .c-APOD {
 	max-width: 380px;
@@ -479,6 +476,7 @@ input::placeholder {
 	scroll-snap-align: center;
 }
 .c-bigpic {
+	padding-top: 48px;
 	max-height: 600px;
 	margin: 0 auto;
 }
@@ -1064,7 +1062,7 @@ body {
 	width: 30vmin;
 }
 
-.card-container {
+.card {
 	margin: 5vmin;
 	position: relative;
 	perspective: 90vmin;
@@ -1074,13 +1072,13 @@ body {
 .card-container:hover .card {
 	box-shadow: 1vmin 5vmin 4vmin rgba(0, 0, 0, 0.15),
 		0.5vmin 4vmin 3vmin rgba(0, 0, 0, 0.1);
-	transform: rotateX(0deg) rotateZ(0deg) translateZ(10vmin) rotateY(0deg)
-		rotateX(-45deg);
+	transform: rotateX(0deg) rotateZ(0deg) translateZ(20vmin) rotateY(0deg)
+		rotatey(10deg);
 }
 .card-container.flipped:hover .card {
 	box-shadow: -1vmin 5vmin 4vmin rgba(0, 0, 0, 0.15),
 		-0.5vmin 4vmin 3vmin rgba(0, 0, 0, 0.1);
-	transform: rotateX(0deg) rotateZ(0deg) rotateY(180deg) translateZ(-10vmin)
+	transform: rotateX(0deg) rotateZ(0deg) rotateY(180deg) translateZ(-20vmin)
 		rotateX(0deg);
 }
 .card-container.flipped .card {
@@ -1159,4 +1157,121 @@ svg.red {
 
 h1 {
 	font-size: 5vmin;
+}
+
+.c-cards {
+	margin: 0 auto;
+	margin-left: -20%;
+}
+.card-container {
+	margin: 0;
+	transform: scale(0.8);
+	margin-right: -200px;
+
+	border-radius: 54px;
+}
+.card-container:hover {
+	margin: 0;
+	transform: scale(0.9);
+	transition: ease-in-out 0.5s;
+	margin-right: -180px;
+	z-index: 100;
+}
+.card-container:nth-child(1) {
+	transform: rotate(-20deg) scale(0.5) translatey(80px);
+	transition: ease-in-out 0.5s;
+}
+.card-container:nth-child(1):hover {
+	margin: 0;
+	transform: scale(1);
+	transition: ease-in-out 0.5s;
+	margin-right: -180px;
+	z-index: 100;
+}
+.card-container:nth-child(2) {
+	transform: rotate(-15deg) scale(0.5) translatey(30px);
+	transition: ease-in-out 0.5s;
+}
+.card-container:nth-child(2):hover {
+	margin: 0;
+	transform: scale(1);
+	transition: ease-in-out 0.5s;
+	margin-right: -180px;
+	z-index: 100;
+}
+.card-container:nth-child(3) {
+	transform: rotate(-10deg) scale(0.5) translatey(10px);
+	transition: ease-in-out 0.5s;
+}
+.card-container:nth-child(3):hover {
+	margin: 0;
+	transform: scale(1);
+	transition: ease-in-out 0.5s;
+	margin-right: -180px;
+	z-index: 100;
+}
+.card-container:nth-child(4) {
+	transform: rotate(-5deg) scale(0.5) translatey(0px);
+	transition: ease-in-out 0.5s;
+}
+.card-container:nth-child(4):hover {
+	margin: 0;
+	transform: scale(1);
+	transition: ease-in-out 0.5s;
+	margin-right: -180px;
+	z-index: 100;
+}
+.card-container:nth-child(5) {
+	transform: rotate(0deg) scale(0.5) translatey(0px);
+	transition: ease-in-out 0.5s;
+}
+.card-container:nth-child(5):hover {
+	margin: 0;
+	transform: scale(1);
+	transition: ease-in-out 0.5s;
+	margin-right: -180px;
+	z-index: 100;
+}
+.card-container:nth-child(6) {
+	transform: rotate(5deg) scale(0.5) translatey(10px);
+	transition: ease-in-out 0.5s;
+}
+.card-container:nth-child(6):hover {
+	margin: 0;
+	transform: scale(1);
+	transition: ease-in-out 0.5s;
+	margin-right: -180px;
+	z-index: 100;
+}
+.card-container:nth-child(7) {
+	transform: rotate(10deg) scale(0.5) translatey(30px);
+	transition: ease-in-out 0.5s;
+}
+.card-container:nth-child(7):hover {
+	margin: 0;
+	transform: scale(1);
+	transition: ease-in-out 0.5s;
+	margin-right: -180px;
+	z-index: 100;
+}
+
+.card-container:nth-child(8) {
+	transform: rotate(20deg) scale(0.5) translatey(80px);
+	transition: ease-in-out 0.5s;
+}
+.card-container:nth-child(8):hover {
+	margin: 0;
+	transform: scale(1);
+	transition: ease-in-out 0.5s;
+	margin-right: -180px;
+	z-index: 100;
+}
+
+.front {
+	display: flex;
+	justify-content: center;
+}
+
+.c-chosen {
+	overflow: hidden;
 }
