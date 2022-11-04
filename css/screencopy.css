@@ -1062,6 +1062,10 @@ body {
 	width: 30vmin;
 }
 
+.c-hidden {
+	display: none;
+}
+
 .card {
 	margin: 5vmin;
 	position: relative;
@@ -1075,16 +1079,17 @@ body {
 	transform: rotateX(0deg) rotateZ(0deg) translateZ(20vmin) rotateY(0deg)
 		rotatey(10deg);
 }
-.card-container.flipped:hover .card {
+/* .card-container.flipped:hover .card {
 	box-shadow: -1vmin 5vmin 4vmin rgba(0, 0, 0, 0.15),
 		-0.5vmin 4vmin 3vmin rgba(0, 0, 0, 0.1);
 	transform: rotateX(0deg) rotateZ(0deg) rotateY(180deg) translateZ(-20vmin)
 		rotateX(0deg);
-}
+} */
 .card-container.flipped .card {
 	box-shadow: -1vmin 1vmin 2vmin rgba(0, 0, 0, 0.19),
 		-1vmin 1vmin 0.5vmin rgba(0, 0, 0, 0.23);
-	transform: rotateX(0deg) rotateZ(0deg) rotateY(180deg);
+	transform: rotateX(94deg) rotateZ(202deg) rotateY(73deg) translateX(-654px)
+		translateY(1735px) translateZ(-873px);
 }
 .card-container .card {
 	background: #fff8e6;
@@ -1114,7 +1119,7 @@ body {
 	transform: rotateY(180deg);
 }
 
-svg {
+/* svg {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1153,21 +1158,25 @@ svg.black {
 svg.red {
 	color: #a34729;
 	stroke: #a34729;
-}
+} */
 
 h1 {
 	font-size: 5vmin;
 }
-
+#img {
+	transform: translatex(315px) translatey(255px) scale(1);
+	margin: 0 auto;
+}
 .c-cards {
 	margin: 0 auto;
-	margin-left: -20%;
+	margin-left: -30%;
+	position: relative;
+	top: -20%;
 }
 .card-container {
 	margin: 0;
-	transform: scale(0.8);
-	margin-right: -200px;
-
+	transform: scale(0.2);
+	margin-right: -260px;
 	border-radius: 54px;
 }
 .card-container:hover {
@@ -1178,7 +1187,7 @@ h1 {
 	z-index: 100;
 }
 .card-container:nth-child(1) {
-	transform: rotate(-20deg) scale(0.5) translatey(80px);
+	transform: rotate(-20deg) scale(0.4) translatey(80px);
 	transition: ease-in-out 0.5s;
 }
 .card-container:nth-child(1):hover {
@@ -1189,7 +1198,7 @@ h1 {
 	z-index: 100;
 }
 .card-container:nth-child(2) {
-	transform: rotate(-15deg) scale(0.5) translatey(30px);
+	transform: rotate(-15deg) scale(0.4) translatey(30px);
 	transition: ease-in-out 0.5s;
 }
 .card-container:nth-child(2):hover {
@@ -1200,7 +1209,7 @@ h1 {
 	z-index: 100;
 }
 .card-container:nth-child(3) {
-	transform: rotate(-10deg) scale(0.5) translatey(10px);
+	transform: rotate(-10deg) scale(0.4) translatey(10px);
 	transition: ease-in-out 0.5s;
 }
 .card-container:nth-child(3):hover {
@@ -1211,7 +1220,7 @@ h1 {
 	z-index: 100;
 }
 .card-container:nth-child(4) {
-	transform: rotate(-5deg) scale(0.5) translatey(0px);
+	transform: rotate(-5deg) scale(0.4) translatey(0px);
 	transition: ease-in-out 0.5s;
 }
 .card-container:nth-child(4):hover {
@@ -1222,7 +1231,7 @@ h1 {
 	z-index: 100;
 }
 .card-container:nth-child(5) {
-	transform: rotate(0deg) scale(0.5) translatey(0px);
+	transform: rotate(0deg) scale(0.4) translatey(0px);
 	transition: ease-in-out 0.5s;
 }
 .card-container:nth-child(5):hover {
@@ -1233,7 +1242,7 @@ h1 {
 	z-index: 100;
 }
 .card-container:nth-child(6) {
-	transform: rotate(5deg) scale(0.5) translatey(10px);
+	transform: rotate(5deg) scale(0.4) translatey(10px);
 	transition: ease-in-out 0.5s;
 }
 .card-container:nth-child(6):hover {
@@ -1244,7 +1253,7 @@ h1 {
 	z-index: 100;
 }
 .card-container:nth-child(7) {
-	transform: rotate(10deg) scale(0.5) translatey(30px);
+	transform: rotate(10deg) scale(0.4) translatey(30px);
 	transition: ease-in-out 0.5s;
 }
 .card-container:nth-child(7):hover {
@@ -1256,7 +1265,7 @@ h1 {
 }
 
 .card-container:nth-child(8) {
-	transform: rotate(20deg) scale(0.5) translatey(80px);
+	transform: rotate(20deg) scale(0.4) translatey(70px);
 	transition: ease-in-out 0.5s;
 }
 .card-container:nth-child(8):hover {
@@ -1274,4 +1283,24 @@ h1 {
 
 .c-chosen {
 	overflow: hidden;
+	position: fixed;
+	top: 5%;
+	z-index: -20;
+}
+
+.c-background {
+	width: 100vh;
+	height: 100vh;
+	margin: 0 auto;
+}
+.backgroundd {
+	transform: scale(1.3);
+}
+body {
+	overflow: hidden;
+	width: 1920 !important;
+	height: 1080 !important;
+}
+.c-cardinfo {
+	display: hidden;
 }

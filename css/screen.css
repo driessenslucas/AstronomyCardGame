@@ -1077,16 +1077,16 @@ body {
 	transform: rotateX(0deg) rotateZ(0deg) translateZ(10vmin) rotateY(0deg)
 		rotateX(-45deg);
 }
-.card-container.flipped:hover .card {
+/* .card-container.flipped:hover .card {
 	box-shadow: -1vmin 5vmin 4vmin rgba(0, 0, 0, 0.15),
 		-0.5vmin 4vmin 3vmin rgba(0, 0, 0, 0.1);
 	transform: rotateX(0deg) rotateZ(0deg) rotateY(180deg) translateZ(-10vmin)
 		rotateX(0deg);
-}
+} */
 .card-container.flipped .card {
 	box-shadow: -1vmin 1vmin 2vmin rgba(0, 0, 0, 0.19),
 		-1vmin 1vmin 0.5vmin rgba(0, 0, 0, 0.23);
-	transform: rotateX(0deg) rotateZ(0deg) rotateY(180deg);
+	transform: rotateX(329deg) rotateZ(5deg) rotateY(98deg) translateX(125px);
 }
 .card-container .card {
 	background: #fff8e6;
