@@ -1058,8 +1058,8 @@ body {
 .card,
 .front,
 .back {
-	height: 42vmin;
-	width: 30vmin;
+	height: 420px;
+	width: 300px;
 }
 
 .c-hidden {
@@ -1067,7 +1067,7 @@ body {
 }
 
 .card {
-	margin: 5vmin;
+	/* margin: 5vmin; */
 	position: relative;
 	perspective: 90vmin;
 	perspective-origin: bottom;
