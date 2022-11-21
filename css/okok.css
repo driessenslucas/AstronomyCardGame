@@ -1045,13 +1045,6 @@ No media query since this is the default in mobile first design
 body {
 	background: #2b323b;
 	color: #fff8e6;
-	display: flex;
-	font-family: 'Quicksand', sans-serif;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	text-align: center;
 }
 
 .card-container,
@@ -1069,8 +1062,6 @@ body {
 .card {
 	/* margin: 5vmin; */
 	position: relative;
-	perspective: 90vmin;
-	perspective-origin: bottom;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .card-container:hover .card {
@@ -1174,15 +1165,15 @@ h1 {
 }
 .c-cards {
 	margin: 0 auto;
-	margin-left: -30%;
-	position: relative;
-	top: -10%;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: baseline;
 }
 .card-container {
 	margin: 0;
 	transform: scale(0.4);
-	margin-right: -260px;
 	border-radius: 54px;
+	margin-right: -240px;
 }
 .card-container:hover {
 	margin: 0;
@@ -1309,19 +1300,41 @@ h1 {
 	z-index: -20;
 }
 
-.c-background {
-	width: 100vh;
-	height: 100vh;
-	margin: 0 auto;
-}
-.backgroundd {
-	transform: scale(2);
-}
 body {
-	overflow: hidden;
-	width: 1920 !important;
-	height: 1080 !important;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	height: 100vh;
 }
 .c-cardinfo {
 	display: hidden;
+}
+
+.board-cards {
+	display: grid;
+	grid-template-columns: 25% 25% 25% 25%;
+	height: 800px;
+	width: 100%;
+	padding: 48px;
+	align-content: center;
+	justify-items: center;
+}
+.cards-sm-container {
+	border: 2px solid black;
+	border-radius: 50%;
+	height: 160px;
+	width: 110px;
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
+}
+.card-sm {
+	align-self: center;
+	height: 180px;
+	width: 120px;
+}
+
+.card--title {
+	overflow: scroll;
+	text-align: center;
 }
