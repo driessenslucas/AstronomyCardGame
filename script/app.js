@@ -4,15 +4,15 @@ let cardnr = 0;
 
 let x = 0;
 
-const recentlyDeleted = function (jsonObject) {
-	console.log(jsonObject);
-	document.querySelector('.c-rect1').innerHTML = `<image
-	
-	href="${jsonObject.url}"
-	width="1210"
-	height="613"
-/>`;
-};
+// const recentlyDeleted = function (jsonObject) {
+// 	console.log(jsonObject);
+// 	document.querySelector('.c-rect1').innerHTML = `<image
+
+// 	href="${jsonObject.url}"
+// 	width="1210"
+// 	height="613"
+// />`;
+// };
 
 const showBigImg = function (url, title) {
 	// document.querySelector(
@@ -1729,23 +1729,32 @@ const showCardOnBoard = function (url) {
 			class="cls-3"
 			d="M76.2,558.29c.28,.12,.72,.19,.8,.39,.08,.2-.2,.54-.32,.82-.28-.12-.72-.18-.8-.39-.08-.2,.2-.54,.32-.82Z"
 		/>
-		<text
+		<foreignObject
 			class=" card--title"
 			x="55"
-			y="370"
-			width="240.77"
+			y="340"
+			width="359"
 			height="30.3" style="font-size:24px"
-		> ${result[0].title}</text>
+		> <h3 xmlns="http://www.w3.org/1999/xhtml" class="titlee" >${result[0].title} </h3></foreignObject>
+		
+		<foreignObject
+			class=" card--title"
+			x="55"
+			y="420"
+			width="359"
+			height="207"
+			style="font-size:24px"
+		> <div xmlns="http://www.w3.org/1999/xhtml" class="disc-div">${result[0].explanation}</div></foreignObject>
+		
 	</svg>`;
 	x++;
 	document.querySelector('.board-cards').innerHTML += html;
 
 	listToBoardhover();
+	getNewImage();
 };
 
-//maak tweede showdata enkel voor eerste keer inladen
-
-const showData2 = async function (jsonObject) {
+const showData = async function (jsonObject) {
 	console.log(jsonObject);
 	let html = '';
 	let i = 0;
@@ -1767,33 +1776,28 @@ const showData2 = async function (jsonObject) {
 	}
 
 	document.querySelector('.c-cards').innerHTML += html;
-	// let cards = document.querySelectorAll('.card-container');
-
-	// cards[0].classList.remove('c-hidden');
-	// await new Promise((resolve) => setTimeout(resolve, 350)); // 3 sec
-
-	// cards[0].classList.remove('flipped');
-	// await new Promise((resolve) => setTimeout(resolve, 900)); // 3 sec
-
-	// for (let i = 0; i < cards.length; i++) {
-	// 	cards[i].classList.remove('c-hidden');
-	// 	cards[i].classList.remove('flipped');
-	// }
-
-	// document.querySelectorAll('.card-container').forEach((card) => {
-	// 	card.classList.remove('c-hidden');
-	// 	card.classList.remove('flipped');
-	// });
 
 	listenToClick();
 };
 
+const getNewImage = function () {
+	if (document.querySelector('.c-cards').childElementCount <= 8) {
+		let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=1`;
+		handleData(url, function (jsonObject) {
+			ListjsonObjects.push(jsonObject);
+			showData(jsonObject);
+		});
+	}
+};
+
 const getApi = function () {
-	let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=2`;
-	handleData(url, function (jsonObject) {
-		ListjsonObjects.push(jsonObject);
-		showData2(jsonObject);
-	});
+	if (document.querySelector('.c-cards').childElementCount <= 8) {
+		let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=8`;
+		handleData(url, function (jsonObject) {
+			ListjsonObjects.push(jsonObject);
+			showData(jsonObject);
+		});
+	}
 };
 
 const listToBoardhover = function () {
@@ -1809,7 +1813,7 @@ const listenToClick = async function () {
 	for (let i = 0; i < cardds.length; i++) {
 		cardds[i].classList.remove('flipped');
 
-		await new Promise((resolve) => setTimeout(resolve, 600));
+		await new Promise((resolve) => setTimeout(resolve, 200));
 		checkCards();
 	}
 
@@ -1822,6 +1826,12 @@ const listenToClick = async function () {
 			showCardOnBoard(document.querySelector(`${imgnr}`).src);
 			const str = e.path[3];
 			str.remove();
+			const result = ListjsonObjects[0].filter(
+				(word) => word.url === document.querySelector(`${imgnr}`).src
+			);
+			const index = ListjsonObjects.indexOf(result[0]);
+			ListjsonObjects.remove(index);
+			console.log(ListjsonObjects);
 		});
 	}
 };
@@ -1835,6 +1845,11 @@ const listenser = function () {
 const checkCards = function () {
 	let cards = document.querySelectorAll('.card-container');
 	document.querySelectorAll('.card-container').forEach((card) => {
+		for (var i = 1; i <= 8; i++) {
+			if (card.classList.contains(`card${i}`)) {
+				card.classList.remove(`card${i}`);
+			}
+		}
 		if (cards[0]) {
 			cards[0].classList.add('card1');
 		}
@@ -1876,10 +1891,4 @@ const loadCards = async function () {
 
 document.addEventListener('DOMContentLoaded', function () {
 	listenser();
-
-	// document.querySelector('.c-card').addEventListener('click', function () {
-	// 	document.querySelector('.c-card').classList.toggle('flipped');
-	// });
-
-	// loadCards();
 });
