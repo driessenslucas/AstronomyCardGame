@@ -1,3 +1,15 @@
+:root {
+	--shadow-color: 218deg 100% 11%;
+	--shadow-elevation-high: 0px 0.4px 0.5px hsl(var(--shadow-color) / 0.34),
+		0.1px 2.3px 2.6px -0.4px hsl(var(--shadow-color) / 0.34),
+		0.2px 4.2px 4.7px -0.7px hsl(var(--shadow-color) / 0.34),
+		0.3px 6.9px 7.8px -1.1px hsl(var(--shadow-color) / 0.34),
+		0.4px 11.1px 12.5px -1.4px hsl(var(--shadow-color) / 0.34),
+		0.6px 17.3px 19.5px -1.8px hsl(var(--shadow-color) / 0.34),
+		1px 26.4px 29.7px -2.1px hsl(var(--shadow-color) / 0.34),
+		1.4px 38.8px 43.7px -2.5px hsl(var(--shadow-color) / 0.34);
+}
+
 @import url('https://fonts.googleapis.com/css?family=Quicksand:700');
 *,
 *:before,
@@ -129,7 +141,7 @@ h1 {
 }
 
 .c-hidden {
-	/* display: none; */
+	display: none;
 }
 
 .c-playboard {
@@ -188,7 +200,7 @@ h1 {
 	transform: translateY(0);
 	opacity: 1;
 }
-.c-playboard__item.c-hidden {
+.c-playboard__item.c-hide {
 	opacity: 0;
 	transform: translateY(300px);
 	transition: all 0.6s ease-out;
@@ -424,4 +436,50 @@ h1 {
 
 .remove-from-field {
 	transform: rotateX(0deg) rotateZ(0deg) rotateY(0deg);
+}
+
+.c-mobile-nav {
+	position: fixed;
+	width: 250px;
+	height: 100vh;
+	left: 0%;
+	z-index: 1000;
+	background-color: lightblue;
+}
+.c-mobile-nav__item {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: start;
+	height: 53px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	box-shadow: var(--shadow-elevation-high);
+}
+.c-nav__title {
+	font-size: 20px;
+	font-weight: 600;
+}
+.c-nav__item-title {
+	font-size: 16px;
+	font-weight: 600;
+}
+.c-nav__img {
+	height: 40px;
+	width: 40px;
+}
+
+.hasmobile-nav .c-blur {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+	backdrop-filter: blur(2px);
+}
+
+@media (min-width: 986px) {
+	.c-mobile-nav {
+		display: none;
+	}
 }

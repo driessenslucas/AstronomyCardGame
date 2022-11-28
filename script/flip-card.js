@@ -80,6 +80,7 @@ const checkCardsInHand = function () {
 const addToHand = async (ChosenCard) => {
 	console.log(ChosenCard);
 	let handHtml = '';
+	let mobilenavHtml = '';
 	for (let i = 0; i < ChosenCard.length; i++) {
 		if (ChosenCard[i].media_type === 'image') {
 			handHtml += `<div class="card-container2 ">
@@ -94,9 +95,14 @@ const addToHand = async (ChosenCard) => {
 					</div>
 				</div>
 			</div>`;
+			mobilenavHtml += `<div class="c-mobile-nav__item ">
+				<img class="c-nav__img c-imgnr${cardnr}" src="${ChosenCard[i].url}" alt="${ChosenCard[i].title}" />
+				<h2 class="c-nav__item-title">${ChosenCard[i].title}</h2>
+			</div>`;
 		}
 		cardnr++;
 	}
+	document.querySelector('.c-card__nav').innerHTML += mobilenavHtml;
 	document.querySelector('.c-cards').innerHTML += handHtml;
 	// await new Promise((r) => setTimeout(r, 1000));
 	// document.querySelectorAll('.card-container2').forEach((card) => {
@@ -119,8 +125,8 @@ const checkCards = (card1, card2) => {
 		// document
 		// 	.querySelector('.c-playboard')
 		// 	.removeChild(document.querySelector(ChosenCardnrs[1]));
-		document.querySelector(ChosenCardnrs[1]).classList.add('c-hidden');
-		document.querySelector(ChosenCardnrs[0]).classList.add('c-hidden');
+		document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
+		document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
 		ChosenCardnrs = [];
 		nummerOfCardNotFlipped = 0;
 		ChosenCards = [];
@@ -173,9 +179,18 @@ const getApi = async function () {
 		showData(jsonObject);
 	});
 };
+const listenToBlur = () => {
+	document.querySelector('.c-blur').addEventListener('click', () => {
+		document.querySelector('.c-mobile-nav').classList.add('c-hidden');
+		document.querySelector('.c-blur').classList.add('c-hidden');
+	});
+};
 
 const init = () => {
 	getApi();
+	if (document.querySelector('.hasmobile-nav')) {
+		listenToBlur();
+	}
 };
 
 document.addEventListener('DOMContentLoaded', () => {
