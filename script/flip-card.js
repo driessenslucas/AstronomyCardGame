@@ -1,9 +1,11 @@
 let CardsArray = [];
 let apiKey = '0wbfxSQ6gzlHNFmELg7orwZgf5cFqVzFALmBrvzH';
 let html = '';
+
 let ChosenCardnrs = [];
 let nummerOfCardNotFlipped = 0;
 let ChosenCards = [];
+let cardnr = 0;
 
 function shuffleArray(array) {
 	for (let i = array.length - 1; i > 0; i--) {
@@ -19,10 +21,10 @@ const showData = function (jsonObject) {
 		for (let x = 0; x < CardsArray[1].length; x++) {
 			console.log(CardsArray);
 			html += `
-        <div class="c-playboard__item cardnr${imgnr}"><div class="card-container  c-card flipped">
+        <div class="c-playboard__item cardnr${imgnr}"><div class="card-container c-card flipped">
 			<div class="card">
 				<div class="front">
-                <img class="c-img c-imgnr${imgnr} " src="${CardsArray[i][x].url}" alt="${CardsArray[i][x].title}" />
+                <img class="c-img c-imgnr${imgnr}" src="${CardsArray[i][x].url}" alt="${CardsArray[i][x].title}" />
 					
 				</div>
 				<div class="back">
@@ -40,19 +42,85 @@ const showData = function (jsonObject) {
 	}
 };
 
+const checkCardsInHand = function () {
+	let cards = document.querySelectorAll('.card-container2');
+	document.querySelectorAll('.card-container2').forEach((card) => {
+		for (var i = 1; i <= 8; i++) {
+			if (card.classList.contains(`card${i}`)) {
+				card.classList.remove(`card${i}`);
+			}
+		}
+		if (cards[0]) {
+			cards[0].classList.add('card1');
+		}
+		if (cards[1]) {
+			cards[1].classList.add('card2');
+		}
+		if (cards[2]) {
+			cards[2].classList.add('card3');
+		}
+		if (cards[3]) {
+			cards[3].classList.add('card4');
+		}
+		if (cards[4]) {
+			cards[4].classList.add('card5');
+		}
+		if (cards[5]) {
+			cards[5].classList.add('card6');
+		}
+		if (cards[6]) {
+			cards[6].classList.add('card7');
+		}
+		if (cards[7]) {
+			cards[7].classList.add('card8');
+		}
+	});
+};
+
+const addToHand = async (ChosenCard) => {
+	console.log(ChosenCard);
+	let handHtml = '';
+	for (let i = 0; i < ChosenCard.length; i++) {
+		if (ChosenCard[i].media_type === 'image') {
+			handHtml += `<div class="card-container2 ">
+			<div class="card cardnr${cardnr}">
+				<div class="front">
+					<img class="c-img c-imgnr${cardnr}" src="${ChosenCard[i].url}" alt="${ChosenCard[i].title}" />
+					</div>
+					<div class="back">
+						<svg viewBox="0 0 300 420">
+							<use xlink:href="#card-back" />
+						</svg>
+					</div>
+				</div>
+			</div>`;
+		}
+		cardnr++;
+	}
+	document.querySelector('.c-cards').innerHTML += handHtml;
+	// await new Promise((r) => setTimeout(r, 1000));
+	// document.querySelectorAll('.card-container2').forEach((card) => {
+	// 	card.classList.remove('c-hidden');
+	// });
+	checkCardsInHand();
+};
+
 const checkCards = (card1, card2) => {
 	console.log(card1);
 	console.log(card2);
 
 	const cards = document.querySelectorAll('.card-container');
 	if (card1[0].url === card2[0].url) {
+		addToHand(ChosenCards[1]);
 		console.log(ChosenCardnrs);
-		document
-			.querySelector('.c-playboard')
-			.removeChild(document.querySelector(ChosenCardnrs[0]));
-		document
-			.querySelector('.c-playboard')
-			.removeChild(document.querySelector(ChosenCardnrs[1]));
+		// document
+		// 	.querySelector('.c-playboard')
+		// 	.removeChild(document.querySelector(ChosenCardnrs[0]));
+		// document
+		// 	.querySelector('.c-playboard')
+		// 	.removeChild(document.querySelector(ChosenCardnrs[1]));
+		document.querySelector(ChosenCardnrs[1]).classList.add('c-hidden');
+		document.querySelector(ChosenCardnrs[0]).classList.add('c-hidden');
 		ChosenCardnrs = [];
 		nummerOfCardNotFlipped = 0;
 		ChosenCards = [];
@@ -84,14 +152,18 @@ const listenToClick = () => {
 				await new Promise((resolve) => setTimeout(resolve, 1000));
 				if (nummerOfCardNotFlipped == 2) {
 					checkCards(ChosenCards[0], ChosenCards[1]);
+					nummerOfCardNotFlipped = 0;
 				}
+			}
+			if (nummerOfCardNotFlipped > 2) {
+				nummerOfCardNotFlipped = 0;
 			}
 		});
 	}
 };
 
 const getApi = async function () {
-	let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=3`;
+	let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=4`;
 	handleData(url, function (jsonObject) {
 		let array = [];
 		array.push(jsonObject);
