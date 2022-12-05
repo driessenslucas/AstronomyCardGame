@@ -8,8 +8,12 @@
 		0.6px 17.3px 19.5px -1.8px hsl(var(--shadow-color) / 0.34),
 		1px 26.4px 29.7px -2.1px hsl(var(--shadow-color) / 0.34),
 		1.4px 38.8px 43.7px -2.5px hsl(var(--shadow-color) / 0.34);
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
 }
-
+::-webkit-scrollbar {
+	width: 0; /* Remove scrollbar space */
+}
 @import url('https://fonts.googleapis.com/css?family=Quicksand:700');
 *,
 *:before,
@@ -447,4 +451,35 @@ h1 {
 	.c-blur {
 		display: none;
 	}
+	.c-nav-trigger {
+		display: none;
+	}
+}
+
+.c-bigCard {
+	z-index: 1200;
+	width: 360px;
+	padding: 8px;
+	height: 500px;
+	overflow: auto;
+	overflow-x: hidden;
+	background-color: #2b323b;
+	text-align: center;
+	margin-bottom: var(--global-whitespace);
+	border: 1px solid var(--global-color-dark);
+	border-radius: 8px;
+	box-shadow: var(--shadow-elevation-high);
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: transform 1s ease-in-out;
+}
+.c-discription {
+	overflow: auto;
+	text-align: start;
+}
+.c-APOD {
+	object-fit: fill;
+	width: 400px;
 }

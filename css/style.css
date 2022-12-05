@@ -851,12 +851,9 @@ body {
 	overflow: auto;
 	margin: 0 auto;
 	text-align: center;
-
 	margin-bottom: var(--global-whitespace);
-
 	border: 1px solid var(--global-color-dark);
 	border-radius: var(--global-borderRadius);
-
 	box-shadow: var(--shadow-elevation-high);
 }
 .c-discription {
