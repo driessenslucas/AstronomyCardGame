@@ -1,6 +1,5 @@
 let CardsArray = [];
-// let apiKey = '0wbfxSQ6gzlHNFmELg7orwZgf5cFqVzFALmBrvzH';
-let apiKey = 'URDTzlNvq1w199k9iMsed1W8BuYcChPWRwZQSTy8';
+let apiKey = '0wbfxSQ6gzlHNFmELg7orwZgf5cFqVzFALmBrvzH';
 let html = '';
 let ChosenCardnrs = [];
 let nummerOfCardNotFlipped = 0;
@@ -16,10 +15,10 @@ const shuffleArray = (array) => {
 	}
 };
 const showData = function (jsonObject) {
-	console.log('ok');
 	shuffleArray(CardsArray);
 	let imgnr = 1;
 	for (let i = 0; i < CardsArray.length; i++) {
+		console.log(CardsArray[i]);
 		html += `
         <div class="c-playboard__item cardnr${imgnr}"><div class="card-container c-card flipped">
 			<div class="card">
@@ -39,11 +38,6 @@ const showData = function (jsonObject) {
 
 	document.querySelector('.c-playboard').innerHTML = html;
 	listenToClick();
-	const grid = document.querySelector('.c-playboard');
-
-	const { forceGridAnimation } = animateCSSGrid.wrapGrid(grid);
-
-	forceGridAnimation();
 };
 
 const showBigCard = async function (jsonObject) {
@@ -61,12 +55,8 @@ const showBigCard = async function (jsonObject) {
         <p class="c-discription u-text-rg">${jsonObject[0].explanation}</p>`;
 	// document.querySelector('.c-Date').innerHTML = jsonObject.date;
 	document.querySelector('.c-bigCard').innerHTML = html;
-
 	document.querySelector('.c-bigCard').classList.remove('c-hidden');
-	setTimeout(function () {
-		document.querySelector('.c-bigCard').classList.remove('c-hidden-opacity');
-	}, 100);
-
+	document.querySelector('.c-mobile-nav').classList.add('c-hidden');
 	document.querySelector('.c-blur').classList.remove('c-hidden');
 	listenToClose();
 };
@@ -147,7 +137,7 @@ const checkCards = async (card1, card2) => {
 		console.log(ChosenCardnrs);
 		// document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
 		// document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
-		await new Promise((resolve) => setTimeout(resolve, 400));
+		await new Promise((resolve) => setTimeout(resolve, 800));
 		document
 			.querySelector('.c-playboard')
 			.removeChild(document.querySelector(ChosenCardnrs[0]));
@@ -174,38 +164,33 @@ const checkCards = async (card1, card2) => {
 const listenToClick = () => {
 	const cards = document.querySelectorAll('.card-container');
 
-	while (ChosenCards.length <= 2) {
-		for (let i = 0; i < cards.length; i++) {
-			cards[i].addEventListener('click', async (e) => {
-				if (
-					nummerOfCardNotFlipped <= 2 &&
-					cards[i].classList.contains('flipped')
-				) {
-					let nr;
-					cards[i].classList.remove('flipped');
-					nummerOfCardNotFlipped++;
-					nr = i + 1;
-					if (ChosenCardnrs.length <= 2) {
-						ChosenCardnrs.push(`.cardnr${nr}`);
-					}
-					let imgnr = `.c-imgnr${nr}`;
-					const result = CardsArray.filter(
-						(word) => word.url === document.querySelector(`${imgnr}`).src
-					);
-					ChosenCards.push(result[0]);
-					console.log(ChosenCards);
-
-					if (nummerOfCardNotFlipped == 2) {
-						await checkCards(ChosenCards[0], ChosenCards[1]);
-						nummerOfCardNotFlipped = 0;
-					}
+	for (let i = 0; i < cards.length; i++) {
+		cards[i].addEventListener('click', async (e) => {
+			console.log(nummerOfCardNotFlipped);
+			if (
+				nummerOfCardNotFlipped <= 1 &&
+				cards[i].classList.contains('flipped') &&
+				ChosenCards.length < 2
+			) {
+				let nr;
+				cards[i].classList.remove('flipped');
+				nummerOfCardNotFlipped++;
+				nr = i + 1;
+				if (ChosenCardnrs.length <= 2) {
+					ChosenCardnrs.push(`.cardnr${nr}`);
 				}
-
-				if (nummerOfCardNotFlipped > 2) {
+				let imgnr = `.c-imgnr${nr}`;
+				const result = CardsArray.filter(
+					(word) => word.url === document.querySelector(`${imgnr}`).src
+				);
+				ChosenCards.push(result[0]);
+				console.log(ChosenCards);
+				if (nummerOfCardNotFlipped == 2) {
+					await checkCards(ChosenCards[0], ChosenCards[1]);
 					nummerOfCardNotFlipped = 0;
 				}
-			});
-		}
+			}
+		});
 	}
 };
 const listenToClickHand = () => {
@@ -255,15 +240,27 @@ const listenToClose = () => {
 };
 
 const getApi = async function () {
-	let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=4`;
-	handleData(url, function (jsonObject) {
-		let array = [];
-		array.push(jsonObject);
-		let array2 = [];
-		array2.push(jsonObject);
-		CardsArray = array[0].concat(array2[0]);
-		showData(jsonObject);
-	});
+	// let url = `https://apod.ellanan.com/api?count=4`;
+	// await handleData(url, function (jsonObject) {
+	// 	let array = [];
+	// 	array.push(jsonObject);
+	// 	let array2 = [];
+	// 	array2.push(jsonObject);
+	// 	CardsArray = array[0].concat(array2[0]);
+	// 	console.log(CardsArray);
+	// 	showData(jsonObject);
+	// });
+	await fetch('https://apod.ellanan.com/api?count=4')
+		.then((response) => response.json())
+		.then((jsonObject) => {
+			let array = [];
+			array.push(jsonObject);
+			let array2 = [];
+			array2.push(jsonObject);
+			CardsArray = array[0].concat(array2[0]);
+			console.log(CardsArray);
+			showData(jsonObject);
+		});
 };
 const listenToBlur = () => {
 	document.querySelector('.c-blur').addEventListener('click', () => {

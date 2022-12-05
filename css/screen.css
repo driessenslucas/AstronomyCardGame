@@ -2,8 +2,9 @@
 	/* typography */
 	--global-root-font-size: 15;
 	/* colors */
+	--global-fill-cardback: darkcyan;
 
-	--global-blur: 0px;
+	--global-blur: rgba(0, 0, 0, 0.711);
 	--global-color-svg-black: #363430;
 	--global-color-svg-white: #fff8e6;
 	--global-color-svg-red: #a34729;
@@ -297,7 +298,7 @@ input::placeholder {
 	position: absolute;
 	top: 0;
 	left: 0;
-	fill: darkcyan;
+	fill: var(--global-fill-cardback);
 	stroke: var(--global-color-svg-white);
 	stroke-width: 6;
 	stroke-linecap: round;
@@ -533,8 +534,8 @@ input::placeholder {
 	transition: ease-in-out 0.5s;
 	margin-right: -11.25rem;
 	z-index: 100;
+	box-shadow: var(--shadow-elevation-high);
 }
-
 .c-hand-cards__container:hover .card {
 	box-shadow: 1vmin 5vmin 4vmin rgba(0, 0, 0, 0.15),
 		0.5vmin 4vmin 3vmin rgba(0, 0, 0, 0.1);
@@ -608,13 +609,22 @@ input::placeholder {
 	justify-content: start;
 	height: 3.3125rem;
 	margin-top: 0.25rem;
+	padding-left: 6px;
 	margin-bottom: 0.25rem;
+	background-color: var(--global-background-color);
+	border: 1px solid var(--global-fill-cardback);
+}
+.c-mobile-nav__item:hover,
+.c-mobile-nav__item:focus {
+	background-color: var(--global-fill-cardback);
 	box-shadow: var(--shadow-elevation-high);
 }
 .c-nav__item-title {
 	font-size: 1rem;
 	font-weight: 600;
 	margin: 0 auto;
+	line-height: 1;
+	max-width: 50%;
 }
 
 .c-close {
@@ -635,16 +645,18 @@ input::placeholder {
 }
 
 .c-nav-trigger {
-	display: flex;
-	align-items: flex-end;
-	justify-content: end;
+	top: 0.75rem;
 	width: 1.5rem;
 	height: 1.5rem;
-	margin: 12px;
-	margin-bottom: 0.5rem;
-	transform: scale(1.5);
 	position: sticky;
-	top: 0.75rem;
+	z-index: 99; /* Make sure it does not overlap */
+	border: none; /* Remove borders */
+	outline: none; /* Remove outline */
+	cursor: pointer; /* Add a mouse pointer on hover */
+	background-color: var(--global-background-color);
+	box-shadow: 0px 0px 4px var(--global-color-neutral-light);
+	border-radius: 2px; /* Rounded corners */
+	margin: 12px;
 }
 
 .c-nav-trigger__svg {
