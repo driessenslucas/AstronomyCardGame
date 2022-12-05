@@ -9,13 +9,26 @@
 		<link rel="stylesheet" href="/css/screen.css" />
 		<link rel="stylesheet" href="/css/normalize.css" />
 	</head>
-	<body class="hasmobile-nav">
+	<body class="has-mobile-nav">
 		<div class="c-mobile-nav">
-			<div class="c-nav__title"><h2>Found Cards</h2></div>
+			<div class="c-mobile-nav-trigger">
+				<div class="o-button-reset c-nav-trigger js-toggle-nav">
+					<svg
+						class="c-nav-trigger__svg"
+						viewBox="0 0 24 24"
+						xmlns="http://www.w3.org/2000/svg">
+						<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+					</svg>
+				</div>
+			</div>
+
+			<div class="c-nav__title">
+				<h2>Found Cards</h2>
+			</div>
 			<div class="c-card__nav"></div>
 		</div>
 		<div class="c-blur"></div>
-		<svg>
+		<svg class="c-hidden">
 			<symbol viewBox="0 0 36 45" id="spade">
 				<path
 					fill="currentColor"
