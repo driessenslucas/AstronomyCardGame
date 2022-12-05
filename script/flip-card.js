@@ -1,5 +1,6 @@
 let CardsArray = [];
-let apiKey = '0wbfxSQ6gzlHNFmELg7orwZgf5cFqVzFALmBrvzH';
+// let apiKey = '0wbfxSQ6gzlHNFmELg7orwZgf5cFqVzFALmBrvzH';
+let apiKey = 'URDTzlNvq1w199k9iMsed1W8BuYcChPWRwZQSTy8';
 let html = '';
 let ChosenCardnrs = [];
 let nummerOfCardNotFlipped = 0;
@@ -60,14 +61,19 @@ const showBigCard = async function (jsonObject) {
         <p class="c-discription u-text-rg">${jsonObject[0].explanation}</p>`;
 	// document.querySelector('.c-Date').innerHTML = jsonObject.date;
 	document.querySelector('.c-bigCard').innerHTML = html;
+
 	document.querySelector('.c-bigCard').classList.remove('c-hidden');
+	setTimeout(function () {
+		document.querySelector('.c-bigCard').classList.remove('c-hidden-opacity');
+	}, 100);
+
 	document.querySelector('.c-blur').classList.remove('c-hidden');
 	listenToClose();
 };
 
 const checkCardsInHand = function () {
-	let cards = document.querySelectorAll('.card-container2');
-	document.querySelectorAll('.card-container2').forEach((card) => {
+	let cards = document.querySelectorAll('.c-hand-cards__container');
+	document.querySelectorAll('.c-hand-cards__container').forEach((card) => {
 		for (var i = 1; i <= 8; i++) {
 			if (card.classList.contains(`card${i}`)) {
 				card.classList.remove(`card${i}`);
@@ -105,7 +111,7 @@ const addToHand = async (ChosenCard) => {
 	let handHtml = '';
 	let mobilenavHtml = '';
 
-	handHtml += `<div class="card-container2 ">
+	handHtml += `<div class="c-hand-cards__container ">
 			<div class="card cardnr${cardnr}">
 				<div class="front">
 					<img class="c-img c-handnr${cardnr}" src="${ChosenCard.url}" alt="${ChosenCard.title}" />
@@ -141,7 +147,7 @@ const checkCards = async (card1, card2) => {
 		console.log(ChosenCardnrs);
 		// document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
 		// document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
-		await new Promise((resolve) => setTimeout(resolve, 100));
+		await new Promise((resolve) => setTimeout(resolve, 400));
 		document
 			.querySelector('.c-playboard')
 			.removeChild(document.querySelector(ChosenCardnrs[0]));
@@ -168,34 +174,42 @@ const checkCards = async (card1, card2) => {
 const listenToClick = () => {
 	const cards = document.querySelectorAll('.card-container');
 
-	for (let i = 0; i < cards.length; i++) {
-		cards[i].addEventListener('click', async (e) => {
-			if (nummerOfCardNotFlipped <= 2) {
-				let nr;
-				cards[i].classList.remove('flipped');
-				nummerOfCardNotFlipped++;
-				nr = i + 1;
-				ChosenCardnrs.push(`.cardnr${nr}`);
-				let imgnr = `.c-imgnr${nr}`;
-				const result = CardsArray.filter(
-					(word) => word.url === document.querySelector(`${imgnr}`).src
-				);
-				ChosenCards.push(result[0]);
-				console.log(ChosenCards);
-				await new Promise((resolve) => setTimeout(resolve, 1000));
-				if (nummerOfCardNotFlipped == 2) {
-					await checkCards(ChosenCards[0], ChosenCards[1]);
+	while (ChosenCards.length <= 2) {
+		for (let i = 0; i < cards.length; i++) {
+			cards[i].addEventListener('click', async (e) => {
+				if (
+					nummerOfCardNotFlipped <= 2 &&
+					cards[i].classList.contains('flipped')
+				) {
+					let nr;
+					cards[i].classList.remove('flipped');
+					nummerOfCardNotFlipped++;
+					nr = i + 1;
+					if (ChosenCardnrs.length <= 2) {
+						ChosenCardnrs.push(`.cardnr${nr}`);
+					}
+					let imgnr = `.c-imgnr${nr}`;
+					const result = CardsArray.filter(
+						(word) => word.url === document.querySelector(`${imgnr}`).src
+					);
+					ChosenCards.push(result[0]);
+					console.log(ChosenCards);
+
+					if (nummerOfCardNotFlipped == 2) {
+						await checkCards(ChosenCards[0], ChosenCards[1]);
+						nummerOfCardNotFlipped = 0;
+					}
+				}
+
+				if (nummerOfCardNotFlipped > 2) {
 					nummerOfCardNotFlipped = 0;
 				}
-			}
-			if (nummerOfCardNotFlipped > 2) {
-				nummerOfCardNotFlipped = 0;
-			}
-		});
+			});
+		}
 	}
 };
 const listenToClickHand = () => {
-	const cardsInHand = document.querySelectorAll('.card-container2');
+	const cardsInHand = document.querySelectorAll('.c-hand-cards__container');
 	cardsInHand.forEach((element) => {
 		for (let index = 0; index < cardsInHand.length; index++) {
 			cardsInHand[index].addEventListener('click', () => {
