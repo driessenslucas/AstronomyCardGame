@@ -20,33 +20,34 @@
 	--global-color-neutral-xx-dark: #3b3b53;
 	/* Shadows */
 	--shadow-color: 0deg 0% 43%;
-	--shadow-elevation-high: 0.2px 0.2px 0.3px hsl(var(--shadow-color) / 0.34),
-		1px 1.3px 1.8px -0.4px hsl(var(--shadow-color) / 0.34),
-		1.8px 2.5px 3.5px -0.7px hsl(var(--shadow-color) / 0.34),
-		3px 4.1px 5.7px -1.1px hsl(var(--shadow-color) / 0.34),
-		4.8px 6.5px 9.1px -1.4px hsl(var(--shadow-color) / 0.34),
-		7.5px 10.1px 14.2px -1.8px hsl(var(--shadow-color) / 0.34),
-		11.5px 15.4px 21.6px -2.1px hsl(var(--shadow-color) / 0.34),
-		16.9px 22.7px 31.8px -2.5px hsl(var(--shadow-color) / 0.34);
+	--shadow-elevation-high: 0.0125rem 0.0125rem 0.0187rem
+			hsl(var(--shadow-color) / 0.34),
+		0.0625rem 0.0813rem 0.1125rem -0.025rem hsl(var(--shadow-color) / 0.34),
+		0.1125rem 0.1563rem 0.2188rem -0.0437rem hsl(var(--shadow-color) / 0.34),
+		0.1875rem 0.2562rem 0.3563rem -0.0688rem hsl(var(--shadow-color) / 0.34),
+		0.3rem 0.4063rem 0.5687rem -0.0875rem hsl(var(--shadow-color) / 0.34),
+		0.4688rem 0.6312rem 0.8875rem -0.1125rem hsl(var(--shadow-color) / 0.34),
+		0.7188rem 0.9625rem 1.35rem -0.1313rem hsl(var(--shadow-color) / 0.34),
+		1.0562rem 1.4187rem 1.9875rem -0.1563rem hsl(var(--shadow-color) / 0.34);
 
 	/* radius */
 	--global-borderRadius: calc(4rem / var(--global-root-font-size));
 
 	/* Whitespace */
 	/* 
-        global font-size = 15px
-        baseline = 5px        
-        15px = 1rem
-        5px = 1rem/3
+        global font-size = 0.9375rem
+        baseline = 0.3125rem        
+        0.9375rem = 1rem
+        0.3125rem = 1rem/3
         This would equal to 0.3333333...rem but let the browser do the math
     */
 	--global-baseline: calc(1rem / 3);
-	--global-whitespace-xxs: var(--global-baseline); /* = 5px */
-	--global-whitespace-xs: calc(var(--global-baseline) * 2); /* = 10px */
-	--global-whitespace-sm: calc(var(--global-baseline) * 3); /* = 15px */
-	--global-whitespace-md: calc(var(--global-baseline) * 4); /* = 20px */
-	--global-whitespace-lg: calc(var(--global-baseline) * 5); /* = 25px */
-	--global-whitespace-xl: calc(var(--global-baseline) * 6); /* = 30px */
+	--global-whitespace-xxs: var(--global-baseline); /* = 0.3125rem */
+	--global-whitespace-xs: calc(var(--global-baseline) * 2); /* = 0.625rem */
+	--global-whitespace-sm: calc(var(--global-baseline) * 3); /* = 0.9375rem */
+	--global-whitespace-md: calc(var(--global-baseline) * 4); /* = 1.25rem */
+	--global-whitespace-lg: calc(var(--global-baseline) * 5); /* = 1.5625rem */
+	--global-whitespace-xl: calc(var(--global-baseline) * 6); /* = 1.875rem */
 
 	/* transitions */
 	--global-transition-alpha: 0.2s;
@@ -124,7 +125,7 @@ h2 {
 }
 
 h3 {
-	/* font-size: 18px; */
+	/* font-size: 1.125rem; */
 	font-size: 1.2rem;
 	line-height: calc(var(--global-baseline) * 6);
 	margin: 0 0 var(--global-whitespace-md);
@@ -133,7 +134,7 @@ h3 {
 h4,
 h5,
 h6 {
-	/* font-size: 15px; */
+	/* font-size: 0.9375rem; */
 	font-size: 1rem;
 	font-weight: 600;
 	line-height: calc(var(--global-baseline) * 5);
@@ -152,7 +153,7 @@ figure {
 
 ul,
 ol {
-	padding-left: 24px;
+	padding-left: 1.5rem;
 }
 
 li ul,
@@ -162,7 +163,7 @@ li ol {
 
 blockquote {
 	font-style: normal;
-	font-size: 23px;
+	font-size: 1.4375rem;
 	line-height: calc(var(--global-baseline) * 5);
 	margin: 0 0 var(--global-whitespace-md);
 }
@@ -174,14 +175,14 @@ blockquote * {
 
 figcaption {
 	font-weight: 400;
-	font-size: 12px;
-	line-height: 16px;
-	margin-top: 8px;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	margin-top: 0.5rem;
 }
 
 hr {
 	border: 0;
-	height: 1px;
+	height: 0.0625rem;
 	background: LightGrey;
 	margin: 0 0 var(--global-whitespace-md);
 }
@@ -191,7 +192,7 @@ a {
 	color: var(--global-color-beta);
 	outline-color: var(--global-color-beta);
 	outline-width: medium;
-	outline-offset: 2px;
+	outline-offset: 0.125rem;
 }
 
 a:visited,
@@ -267,7 +268,7 @@ input::placeholder {
 	justify-content: center;
 	align-items: center;
 	transition: 1s ease-in-out;
-	width: 300px;
+	width: 18.75rem;
 	margin: 0 auto;
 }
 
@@ -609,10 +610,10 @@ input::placeholder {
 	justify-content: start;
 	height: 3.3125rem;
 	margin-top: 0.25rem;
-	padding-left: 6px;
+	padding-left: 0.375rem;
 	margin-bottom: 0.25rem;
 	background-color: var(--global-background-color);
-	border: 1px solid var(--global-fill-cardback);
+	border: 0.0625rem solid var(--global-fill-cardback);
 }
 .c-mobile-nav__item:hover,
 .c-mobile-nav__item:focus {
@@ -654,9 +655,9 @@ input::placeholder {
 	outline: none; /* Remove outline */
 	cursor: pointer; /* Add a mouse pointer on hover */
 	background-color: var(--global-background-color);
-	box-shadow: 0px 0px 4px var(--global-color-neutral-light);
-	border-radius: 2px; /* Rounded corners */
-	margin: 12px;
+	box-shadow: 0rem 0rem 0.25rem var(--global-color-neutral-light);
+	border-radius: 0.125rem; /* Rounded corners */
+	margin: 0.75rem;
 }
 
 .c-nav-trigger__svg {
@@ -671,7 +672,7 @@ input::placeholder {
 	width: 1.5rem;
 	height: 1.5rem;
 	transform: scale(1.5);
-	margin: 24px;
+	margin: 1.5rem;
 	margin-bottom: 0.5rem;
 }
 
