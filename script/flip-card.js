@@ -47,7 +47,7 @@ const showData = function (jsonObject) {
 
 const showBigCard = async function (jsonObject) {
 	console.log(jsonObject);
-	let html = `<div class="o-button-reset c-nav-trigger js-toggle-nav js-close"><svg
+	let html = `<div class="o-button-reset c-nav-trigger js-close"><svg
 					class="c-nav-trigger__svg"
 					viewBox="0 0 24 24"
 					xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +61,7 @@ const showBigCard = async function (jsonObject) {
 	// document.querySelector('.c-Date').innerHTML = jsonObject.date;
 	document.querySelector('.c-bigCard').innerHTML = html;
 	document.querySelector('.c-bigCard').classList.remove('c-hidden');
-
+	document.querySelector('.c-blur').classList.remove('c-hidden');
 	listenToClose();
 };
 
@@ -108,7 +108,7 @@ const addToHand = async (ChosenCard) => {
 	handHtml += `<div class="card-container2 ">
 			<div class="card cardnr${cardnr}">
 				<div class="front">
-					<img class="c-img c-imgnr${cardnr}" src="${ChosenCard.url}" alt="${ChosenCard.title}" />
+					<img class="c-img c-handnr${cardnr}" src="${ChosenCard.url}" alt="${ChosenCard.title}" />
 					</div>
 					<div class="back">
 						<svg class="card-svg" viewBox="0 0 300 420">
@@ -118,7 +118,7 @@ const addToHand = async (ChosenCard) => {
 				</div>
 			</div>`;
 	mobilenavHtml += `<div class="c-mobile-nav__item ">
-				<img class="c-nav__img c-imgnr${cardnr}" src="${ChosenCard.url}" alt="${ChosenCard.title}" />
+				<img class="c-nav__img c-handnr${cardnr}" src="${ChosenCard.url}" alt="${ChosenCard.title}" />
 				<h2 class="c-nav__item-title">${ChosenCard.title}</h2>
 			</div>`;
 	cardnr++;
@@ -167,10 +167,10 @@ const checkCards = async (card1, card2) => {
 
 const listenToClick = () => {
 	const cards = document.querySelectorAll('.card-container');
+
 	for (let i = 0; i < cards.length; i++) {
 		cards[i].addEventListener('click', async (e) => {
 			if (nummerOfCardNotFlipped <= 2) {
-				console.log(ChosenCardnrs);
 				let nr;
 				cards[i].classList.remove('flipped');
 				nummerOfCardNotFlipped++;
@@ -181,6 +181,7 @@ const listenToClick = () => {
 					(word) => word.url === document.querySelector(`${imgnr}`).src
 				);
 				ChosenCards.push(result[0]);
+				console.log(ChosenCards);
 				await new Promise((resolve) => setTimeout(resolve, 1000));
 				if (nummerOfCardNotFlipped == 2) {
 					await checkCards(ChosenCards[0], ChosenCards[1]);
@@ -199,7 +200,7 @@ const listenToClickHand = () => {
 		for (let index = 0; index < cardsInHand.length; index++) {
 			cardsInHand[index].addEventListener('click', () => {
 				let nr = index + 1;
-				let imgnr = `.c-imgnr${nr}`;
+				let imgnr = `.c-handnr${nr}`;
 				console.log('clicked card');
 				const result = CardsArray.filter(
 					(word) => word.url === document.querySelector(`${imgnr}`).src
@@ -220,7 +221,7 @@ const listenToClickHandMobile = () => {
 				document.querySelector('.c-mobile-nav').classList.toggle('c-hidden');
 				document.querySelector('.c-blur').classList.toggle('c-hidden');
 				let nr = index + 1;
-				let imgnr = `.c-imgnr${nr}`;
+				let imgnr = `.c-handnr${nr}`;
 				console.log('clicked card');
 				const result = CardsArray.filter(
 					(word) => word.url === document.querySelector(`${imgnr}`).src
@@ -235,6 +236,7 @@ const listenToClose = () => {
 	document.querySelector('.js-close').addEventListener('click', function () {
 		console.log('click');
 		document.querySelector('.c-bigCard').classList.add('c-hidden');
+		document.querySelector('.c-blur').classList.add('c-hidden');
 	});
 };
 
@@ -254,6 +256,7 @@ const listenToBlur = () => {
 		document.querySelector('.c-mobile-nav').classList.add('c-hidden');
 		document.querySelector('body').classList.toggle('has-mobile-nav');
 		document.querySelector('.c-blur').classList.add('c-hidden');
+		document.querySelector('.c-bigCard').classList.add('c-hidden');
 	});
 };
 

@@ -435,7 +435,7 @@ h1 {
 	height: 100%;
 }
 
-.has-mobile-nav .c-blur {
+.c-blur {
 	position: fixed;
 	height: 100%;
 	width: 100%;
@@ -451,7 +451,7 @@ h1 {
 	.c-blur {
 		display: none;
 	}
-	.c-nav-trigger {
+	.js-toggle-nav {
 		display: none;
 	}
 }
