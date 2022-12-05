@@ -7,12 +7,13 @@
 		<script src="/script/flip-card.js"></script>
 		<script src="/script/dataHandler.js"></script>
 		<link rel="stylesheet" href="/css/screen.css" />
+		<script src="https://unpkg.com/animate-css-grid@latest"></script>
 		<link rel="stylesheet" href="/css/normalize.css" />
 	</head>
-	<body class="has-mobile-nav">
-		<div class="c-mobile-nav">
+	<body class="">
+		<div class="c-mobile-nav c-hidden">
 			<div class="c-mobile-nav-trigger">
-				<div class="o-button-reset c-nav-trigger js-toggle-nav">
+				<div class="o-button-reset c-nav-trigger js-toggle-nav js-close">
 					<svg
 						class="c-nav-trigger__svg"
 						viewBox="0 0 24 24"
@@ -27,7 +28,7 @@
 			</div>
 			<div class="c-card__nav"></div>
 		</div>
-		<div class="c-blur"></div>
+		<div class="c-blur c-hidden"></div>
 		<svg class="c-hidden">
 			<symbol viewBox="0 0 36 45" id="spade">
 				<path
@@ -102,6 +103,14 @@
 		</svg>
 
 		<div class="o-container">
+			<div class="o-button-reset c-nav-trigger js-toggle-nav js-open">
+				<svg
+					class="c-nav-trigger__svg"
+					viewBox="0 0 24 24"
+					xmlns="http://www.w3.org/2000/svg">
+					<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+				</svg>
+			</div>
 			<div class="c-playboard"></div>
 			<div class="c-cards o-layout o-layout--justify-center"></div>
 		</div>

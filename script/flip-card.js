@@ -1,7 +1,6 @@
 let CardsArray = [];
 let apiKey = '0wbfxSQ6gzlHNFmELg7orwZgf5cFqVzFALmBrvzH';
 let html = '';
-
 let ChosenCardnrs = [];
 let nummerOfCardNotFlipped = 0;
 let ChosenCards = [];
@@ -39,6 +38,11 @@ const showData = function (jsonObject) {
 
 	document.querySelector('.c-playboard').innerHTML = html;
 	listenToClick();
+	const grid = document.querySelector('.c-playboard');
+
+	const { forceGridAnimation } = animateCSSGrid.wrapGrid(grid);
+
+	forceGridAnimation();
 };
 
 const checkCardsInHand = function () {
@@ -110,10 +114,19 @@ const checkCards = async (card1, card2) => {
 	if (card1.url == card2.url && ChosenCardnrs[0] != ChosenCardnrs[1]) {
 		console.log('gelijk');
 		console.log(ChosenCards);
-		addToHand(ChosenCards[0]);
+
 		console.log(ChosenCardnrs);
-		document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
-		document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
+		// document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
+		// document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
+
+		document
+			.querySelector('.c-playboard')
+			.removeChild(document.querySelector(ChosenCardnrs[0]));
+		document
+			.querySelector('.c-playboard')
+			.removeChild(document.querySelector(ChosenCardnrs[1]));
+		await new Promise((resolve) => setTimeout(resolve, 500));
+		addToHand(ChosenCards[0]);
 		ChosenCardnrs = [];
 		nummerOfCardNotFlipped = 0;
 		ChosenCards = [];
@@ -172,25 +185,31 @@ const getApi = async function () {
 const listenToBlur = () => {
 	document.querySelector('.c-blur').addEventListener('click', () => {
 		document.querySelector('.c-mobile-nav').classList.add('c-hidden');
+		document.querySelector('body').classList.toggle('has-mobile-nav');
 		document.querySelector('.c-blur').classList.add('c-hidden');
 	});
 };
 
 function toggleNav() {
-	document
-		.querySelector('.js-toggle-nav')
-		.addEventListener('click', function () {
-			document.querySelector('body').classList.toggle('has-mobile-nav');
-
-			document.querySelector('.c-mobile-nav').classList.add('c-hidden');
-			document.querySelector('.c-blur').classList.add('c-hidden');
-		});
+	document.querySelector('.js-open').addEventListener('click', function () {
+		console.log('click');
+		document.querySelector('body').classList.toggle('has-mobile-nav');
+		document.querySelector('.c-mobile-nav').classList.toggle('c-hidden');
+		document.querySelector('.c-blur').classList.toggle('c-hidden');
+	});
+	document.querySelector('.js-close').addEventListener('click', function () {
+		console.log('click');
+		document.querySelector('body').classList.toggle('has-mobile-nav');
+		document.querySelector('.c-mobile-nav').classList.toggle('c-hidden');
+		document.querySelector('.c-blur').classList.toggle('c-hidden');
+	});
+	listenToBlur();
 }
 
 const init = () => {
 	getApi();
 	if (document.querySelector('.has-mobile-nav')) {
-		listenToBlur();
+		// listenToBlur();
 	}
 };
 

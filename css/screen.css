@@ -150,7 +150,6 @@ h1 {
 	height: 100%;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: repeat(4, 1fr);
-
 	justify-content: center;
 	align-items: center;
 	transition: 1s ease-in-out;
@@ -420,15 +419,15 @@ h1 {
 
 .c-nav-trigger {
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	align-items: flex-end;
+	justify-content: end;
 	margin-bottom: 24px;
 	width: 24px;
 	height: 24px;
 }
 
 .c-nav-trigger__svg {
-	fill: #202024;
+	fill: white;
 	height: 100%;
 }
 
