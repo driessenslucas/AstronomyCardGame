@@ -4,6 +4,7 @@ let html = '';
 let ChosenCardnrs = [];
 let nummerOfCardNotFlipped = 0;
 let ChosenCards = [];
+let toggle = false;
 let cardnr = 1;
 
 const shuffleArray = (array) => {
@@ -20,14 +21,14 @@ const showData = function (jsonObject) {
 	for (let i = 0; i < CardsArray.length; i++) {
 		console.log(CardsArray[i]);
 		html += `
-        <div class="c-playboard__item cardnr${imgnr}"><div class="card-container c-card flipped">
+        <div class="c-playboard__item cardnr${imgnr}" tabindex="0" ><div class="card-container c-card flipped">
 			<div class="card">
 				<div class="front">
                 <img class="c-img c-imgnr${imgnr}" src="${CardsArray[i].url}" alt="${CardsArray[i].title}" />
 					
 				</div>
 				<div class="back">
-					<svg class="card-svg" viewBox="0 0 300 420">
+					<svg  focusable="true" class="card-svg" viewBox="0 0 300 420">
 						<use xlink:href="#card-back" />
 					</svg>
 				</div>
@@ -42,7 +43,7 @@ const showData = function (jsonObject) {
 
 const showBigCard = async function (jsonObject) {
 	console.log(jsonObject);
-	let html = `<div class="o-button-reset c-nav-trigger js-close"><svg
+	let html = `<div class="o-button-reset c-nav-trigger js-close" tabindex="0"  ><svg
 					class="c-nav-trigger__svg"
 					viewBox="0 0 24 24"
 					xmlns="http://www.w3.org/2000/svg">
@@ -58,6 +59,7 @@ const showBigCard = async function (jsonObject) {
 	document.querySelector('.c-bigCard').classList.remove('c-hidden');
 	document.querySelector('.c-mobile-nav').classList.add('c-hidden');
 	document.querySelector('.c-blur').classList.remove('c-hidden');
+	document.querySelector('.c-bigCard').focus();
 	listenToClose();
 };
 
@@ -101,56 +103,112 @@ const addToHand = async (ChosenCard) => {
 	let handHtml = '';
 	let mobilenavHtml = '';
 
-	handHtml += `<div class="c-hand-cards__container ">
+	handHtml += `<div class="c-hand-cards__container " tabindex="0">
 			<div class="card cardnr${cardnr}">
 				<div class="front">
 					<img class="c-img c-handnr${cardnr}" src="${ChosenCard.url}" alt="${ChosenCard.title}" />
 					</div>
 					<div class="back">
-						<svg class="card-svg" viewBox="0 0 300 420">
+						<svg  focusable="true" class="card-svg" viewBox="0 0 300 420">
 							<use xlink:href="#card-back" />
 						</svg>
 					</div>
 				</div>
 			</div>`;
-	mobilenavHtml += `<div class="c-mobile-nav__item ">
+	mobilenavHtml += `<li class="c-mobile-nav__item " tabindex="0">
 				<img class="c-nav__img c-handnr${cardnr}" src="${ChosenCard.url}" alt="${ChosenCard.title}" />
 				<h2 class="c-nav__item-title">${ChosenCard.title}</h2>
-			</div>`;
+			</li>`;
 	cardnr++;
 	document.querySelector('.c-card__nav').innerHTML += mobilenavHtml;
 	document.querySelector('.c-cards').innerHTML += handHtml;
-
 	checkCardsInHand();
 	listenToClickHand();
 	listenToClickHandMobile();
+	document.querySelector('.o-container').focus();
 };
 
 const checkCards = async (card1, card2) => {
 	console.log(card1);
 	console.log(card2);
 	const cards = document.querySelectorAll('.card-container');
-	if (card1.url == card2.url && ChosenCardnrs[0] != ChosenCardnrs[1]) {
-		console.log('gelijk');
-		console.log(ChosenCards);
+	try {
+		if (card1.url == card2.url && ChosenCardnrs[0] != ChosenCardnrs[1]) {
+			console.log('gelijk');
+			console.log(ChosenCards);
 
-		console.log(ChosenCardnrs);
-		// document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
-		// document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
-		await new Promise((resolve) => setTimeout(resolve, 800));
-		document
-			.querySelector('.c-playboard')
-			.removeChild(document.querySelector(ChosenCardnrs[0]));
-		document
-			.querySelector('.c-playboard')
-			.removeChild(document.querySelector(ChosenCardnrs[1]));
-		await new Promise((resolve) => setTimeout(resolve, 300));
-		addToHand(ChosenCards[0]);
-		ChosenCardnrs = [];
-		nummerOfCardNotFlipped = 0;
-		ChosenCards = [];
-	} else {
-		console.log('niet gelijk');
+			console.log(ChosenCardnrs);
+			// document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
+			// document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
+			await new Promise((resolve) => setTimeout(resolve, 800));
+			document
+				.querySelector('.c-playboard')
+				.removeChild(document.querySelector(ChosenCardnrs[0]));
+			document
+				.querySelector('.c-playboard')
+				.removeChild(document.querySelector(ChosenCardnrs[1]));
+			await new Promise((resolve) => setTimeout(resolve, 300));
+			addToHand(ChosenCards[0]);
+			ChosenCardnrs = [];
+			nummerOfCardNotFlipped = 0;
+			ChosenCards = [];
+			console.log(
+				`childeren left ${
+					document.querySelector('.c-playboard').children.length
+				}`
+			);
+			if (document.querySelector('.c-playboard').children.length == 0) {
+				document.querySelector('.c-restart-btn').classList.remove('c-hidden');
+			}
+		} else {
+			console.log('niet gelijk');
+			cards.forEach(async (card) => {
+				await new Promise((resolve) => setTimeout(resolve, 600));
+				card.classList.add('flipped');
+				ChosenCards = [];
+				ChosenCardnrs = [];
+				nummerOfCardNotFlipped = 0;
+			});
+		}
+	} catch {
+		if (card1.url === card2.url && ChosenCardnrs[0] != ChosenCardnrs[1]) {
+			console.log('gelijk');
+			console.log(ChosenCards);
+
+			console.log(ChosenCardnrs);
+			// document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
+			// document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
+			await new Promise((resolve) => setTimeout(resolve, 800));
+			document
+				.querySelector('.c-playboard')
+				.removeChild(document.querySelector(ChosenCardnrs[0]));
+			document
+				.querySelector('.c-playboard')
+				.removeChild(document.querySelector(ChosenCardnrs[1]));
+			await new Promise((resolve) => setTimeout(resolve, 300));
+			addToHand(ChosenCards[0]);
+			ChosenCardnrs = [];
+			nummerOfCardNotFlipped = 0;
+			ChosenCards = [];
+			console.log(
+				`childeren left ${
+					document.querySelector('.c-playboard').children.length
+				}`
+			);
+			if (document.querySelector('.c-playboard').children.length == 0) {
+				document.querySelector('.c-restart-btn').classList.remove('c-hidden');
+			}
+		} else {
+			console.log('niet gelijk');
+			cards.forEach(async (card) => {
+				await new Promise((resolve) => setTimeout(resolve, 600));
+				card.classList.add('flipped');
+				ChosenCards = [];
+				ChosenCardnrs = [];
+				nummerOfCardNotFlipped = 0;
+			});
+		}
+	} finally {
 		cards.forEach(async (card) => {
 			await new Promise((resolve) => setTimeout(resolve, 600));
 			card.classList.add('flipped');
@@ -162,37 +220,57 @@ const checkCards = async (card1, card2) => {
 };
 
 const listenToClick = () => {
+	const playboaritems = document.querySelectorAll('.c-playboard__item');
+	playboaritems.forEach((element) => {
+		element.addEventListener('keydown', onKeyDown);
+		element.addEventListener('keypress', (event) => {
+			event.target.firstChild.click();
+		});
+	});
+
 	const cards = document.querySelectorAll('.card-container');
 
 	for (let i = 0; i < cards.length; i++) {
-		cards[i].addEventListener('click', async (e) => {
-			console.log(nummerOfCardNotFlipped);
-			if (
-				nummerOfCardNotFlipped <= 1 &&
-				cards[i].classList.contains('flipped') &&
-				ChosenCards.length < 2
-			) {
-				let nr;
-				cards[i].classList.remove('flipped');
-				nummerOfCardNotFlipped++;
-				nr = i + 1;
-				if (ChosenCardnrs.length <= 2) {
-					ChosenCardnrs.push(`.cardnr${nr}`);
-				}
-				let imgnr = `.c-imgnr${nr}`;
-				const result = CardsArray.filter(
-					(word) => word.url === document.querySelector(`${imgnr}`).src
-				);
-				ChosenCards.push(result[0]);
-				console.log(ChosenCards);
-				if (nummerOfCardNotFlipped == 2) {
-					await checkCards(ChosenCards[0], ChosenCards[1]);
-					nummerOfCardNotFlipped = 0;
-				}
+		cards[i].addEventListener('click', (e) => {
+			handleClick(cards[i], i);
+		});
+		cards[i].addEventListener('keypress', (event) => {
+			if (event.key === 'Enter') {
+				handleClick(cards[i], i);
 			}
 		});
 	}
 };
+
+const handleClick = async (card, i) => {
+	console.log(card);
+	const cards = document.querySelectorAll('.card-container');
+	console.log(nummerOfCardNotFlipped);
+	if (
+		nummerOfCardNotFlipped <= 1 &&
+		card.classList.contains('flipped') &&
+		ChosenCards.length < 2
+	) {
+		let nr;
+		card.classList.remove('flipped');
+		nummerOfCardNotFlipped++;
+		nr = i + 1;
+		if (ChosenCardnrs.length <= 2) {
+			ChosenCardnrs.push(`.cardnr${nr}`);
+		}
+		let imgnr = `.c-imgnr${nr}`;
+		const result = CardsArray.filter(
+			(word) => word.url === document.querySelector(`${imgnr}`).src
+		);
+		ChosenCards.push(result[0]);
+		console.log(ChosenCards);
+		if (nummerOfCardNotFlipped == 2) {
+			await checkCards(ChosenCards[0], ChosenCards[1]);
+			nummerOfCardNotFlipped = 0;
+		}
+	}
+};
+
 const listenToClickHand = () => {
 	const cardsInHand = document.querySelectorAll('.c-hand-cards__container');
 	cardsInHand.forEach((element) => {
@@ -207,6 +285,14 @@ const listenToClickHand = () => {
 				showBigCard(result);
 			});
 		}
+	});
+	cardsInHand.forEach((element) => {
+		element.addEventListener('keydown', onKeyDown);
+		element.addEventListener('keypress', (event) => {
+			if (event.key === 'Enter') {
+				event.target.click();
+			}
+		});
 	});
 };
 
@@ -232,24 +318,23 @@ const listenToClickHandMobile = () => {
 };
 
 const listenToClose = () => {
-	document.querySelector('.js-close').addEventListener('click', function () {
+	disableTabIndex(document.querySelectorAll('.c-hand-cards__container'));
+	disableTabIndex(document.querySelectorAll('.c-playboard__item'));
+	document.querySelector('.js-close').addEventListener('click', () => {
 		console.log('click');
 		document.querySelector('.c-bigCard').classList.add('c-hidden');
 		document.querySelector('.c-blur').classList.add('c-hidden');
+		enableTabInded(document.querySelectorAll('.c-hand-cards__container'));
+		enableTabInded(document.querySelectorAll('.c-playboard__item'));
+	});
+	document.querySelector('.js-close').addEventListener('keypress', (event) => {
+		if (event.key === 'Enter') {
+			event.target.click();
+		}
 	});
 };
 
 const getApi = async function () {
-	// let url = `https://apod.ellanan.com/api?count=4`;
-	// await handleData(url, function (jsonObject) {
-	// 	let array = [];
-	// 	array.push(jsonObject);
-	// 	let array2 = [];
-	// 	array2.push(jsonObject);
-	// 	CardsArray = array[0].concat(array2[0]);
-	// 	console.log(CardsArray);
-	// 	showData(jsonObject);
-	// });
 	await fetch('https://apod.ellanan.com/api?count=4')
 		.then((response) => response.json())
 		.then((jsonObject) => {
@@ -262,37 +347,120 @@ const getApi = async function () {
 			showData(jsonObject);
 		});
 };
+
+const disableTabIndex = (doc) => {
+	doc.forEach((element) => {
+		element.tabIndex = -1;
+	});
+};
+const enableTabInded = (doc) => {
+	doc.forEach((element) => {
+		element.tabIndex = 0;
+	});
+};
+
 const listenToBlur = () => {
 	document.querySelector('.c-blur').addEventListener('click', () => {
 		document.querySelector('.c-mobile-nav').classList.add('c-hidden');
-		document.querySelector('body').classList.toggle('has-mobile-nav');
+		document.querySelector('body').classList.remove('has-mobile-nav');
 		document.querySelector('.c-blur').classList.add('c-hidden');
 		document.querySelector('.c-bigCard').classList.add('c-hidden');
+		enableTabInded(document.querySelectorAll('.c-hand-cards__container'));
+		enableTabInded(document.querySelectorAll('.c-playboard__item'));
 	});
 };
 
 function toggleNav() {
 	document.querySelectorAll('.js-toggle-nav').forEach((element) => {
 		element.addEventListener('click', function () {
-			console.log('click');
+			toggle = !toggle;
 			document.querySelector('body').classList.toggle('has-mobile-nav');
 			document.querySelector('.c-mobile-nav').classList.toggle('c-hidden');
 			document.querySelector('.c-blur').classList.toggle('c-hidden');
+			document.querySelector('.c-mobile-nav').focus();
+			if (!toggle) {
+				enableTabInded(document.querySelectorAll('.c-hand-cards__container'));
+				enableTabInded(document.querySelectorAll('.c-playboard__item'));
+			} else {
+				disableTabIndex(document.querySelectorAll('.c-hand-cards__container'));
+				disableTabIndex(document.querySelectorAll('.c-playboard__item'));
+			}
 		});
 	});
 
 	listenToBlur();
 }
 
+const reStartGame = () => {
+	document.querySelector('.c-restart-btn').addEventListener('click', () => {
+		location.reload();
+	});
+	document
+		.querySelector('.c-restart-btn')
+		.addEventListener('keypress', (event) => {
+			if (event.key === 'Enter') {
+				event.target.click();
+			}
+		});
+};
+
 const init = () => {
 	getApi();
-	if (document.querySelector('.has-mobile-nav')) {
-		// listenToBlur();
-	}
+	reStartGame();
 };
 
 document.addEventListener('DOMContentLoaded', () => {
 	console.log('dom content loaded');
 	init();
+
 	toggleNav();
 });
+const KEYCODE = {
+	LEFT: 37,
+	RIGHT: 39,
+};
+
+function onKeyDown(event) {
+	switch (event.keyCode) {
+		case KEYCODE.RIGHT:
+			event.preventDefault();
+			focusNextItem();
+			break;
+		case KEYCODE.LEFT:
+			event.preventDefault();
+			focusPreviousItem();
+			break;
+	}
+}
+
+function onClick(event) {
+	const buttons = Array.from(toolbar.querySelectorAll('button'));
+	if (buttons.indexOf(event.target) == -1) {
+		return;
+	}
+	activate(event.target);
+}
+
+function focusNextItem() {
+	const item = document.activeElement;
+	if (item.nextElementSibling) {
+		console.log('true');
+		activate(item.nextElementSibling);
+	}
+}
+
+function focusPreviousItem() {
+	const item = document.activeElement;
+	if (item.previousElementSibling) {
+		activate(item.previousElementSibling);
+	}
+}
+
+function activate(item) {
+	document
+		.querySelectorAll('.c-playboard__item')
+		.forEach((i) => (i.tabIndex = 0));
+
+	item.tabIndex = 0;
+	item.focus();
+}
