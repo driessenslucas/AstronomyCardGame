@@ -387,6 +387,13 @@ function toggleNav() {
 			}
 		});
 	});
+	document.querySelectorAll('.js-toggle-nav').forEach((element) => {
+		element.addEventListener('keypress', (event) => {
+			if (event.key === 'Enter') {
+				event.target.click();
+			}
+		});
+	});
 
 	listenToBlur();
 }

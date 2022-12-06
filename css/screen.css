@@ -627,7 +627,7 @@ input::placeholder {
 	font-weight: 600;
 	margin: 0 auto;
 	line-height: 1;
-	max-width: 50%;
+	max-width: 80%;
 }
 
 .c-close {
