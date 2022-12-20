@@ -605,6 +605,9 @@ input::placeholder {
 	font-size: 1.25rem;
 	font-weight: 600;
 }
+.c-card__nav {
+	padding: 0;
+}
 .c-mobile-nav__item {
 	display: flex;
 	flex-direction: row;
@@ -647,6 +650,10 @@ input::placeholder {
 	width: 2.5rem;
 }
 
+.c-title {
+	display: sticky;
+	top: 0%;
+}
 .c-nav-trigger {
 	top: 0.75rem;
 	width: 1.5rem;
@@ -688,9 +695,9 @@ input::placeholder {
 	display: flex;
 	flex-direction: column;
 	z-index: 1200;
-	width: 22.5rem;
+	width: 24.5rem;
 	padding: 0.5rem;
-	height: 31.25rem;
+	height: 39.25rem;
 	overflow: auto;
 	overflow-x: hidden;
 	background-color: var(--global-background-color);
@@ -722,7 +729,7 @@ input::placeholder {
 }
 .c-APOD {
 	object-fit: fill;
-	width: 20rem;
+	max-width: 23rem;
 	margin: 0 auto;
 	margin-bottom: var(--global-whitespace-sm);
 }
@@ -774,8 +781,27 @@ body.has-mobile-nav .o-container {
 }
 
 .js-close:focus-visible {
-	transform: scale(1.4) rotate(45deg);
+	transform: scale(1.4);
 }
 .js-close:focus-visible .c-nav-trigger__svg {
 	fill: var(--global-color-svg-red);
+}
+
+.c-progress {
+	height: 1.25rem;
+	background-color: var(--global-color-svg-white);
+	color: var(--global-color-neutral-dark);
+	text-align: center;
+}
+.c-bar {
+	margin: 0 auto;
+	width: 12.5rem;
+	height: 1.25rem;
+	background-color: var(--global-fill-cardback);
+}
+
+@media (min-width: 700px) {
+	.c-bigCard {
+		width: 29rem;
+	}
 }

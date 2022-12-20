@@ -6,6 +6,8 @@ let nummerOfCardNotFlipped = 0;
 let ChosenCards = [];
 let toggle = false;
 let cardnr = 1;
+let maxValue = 0;
+let minValue = 10000000;
 
 const shuffleArray = (array) => {
 	for (let i = array.length - 1; i > 0; i--) {
@@ -51,6 +53,7 @@ const showBigCard = async function (jsonObject) {
 								d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
 							/>
 				</svg></div>
+				<div class="c-bar"><div class="c-progress"></div></div>
 				<h2 class="c-title u-text-xl">${jsonObject[0].title}</h2>
         <img src="${jsonObject[0].url}" alt="" class="c-APOD" />
         <p class="c-discription u-text-rg">${jsonObject[0].explanation}</p>`;
@@ -60,6 +63,21 @@ const showBigCard = async function (jsonObject) {
 	document.querySelector('.c-mobile-nav').classList.add('c-hidden');
 	document.querySelector('.c-blur').classList.remove('c-hidden');
 	document.querySelector('.c-bigCard').focus();
+	CardsArray.forEach((element) => {
+		if (element.explanation.length > maxValue) {
+			maxValue = element.explanation.length;
+		}
+		if (element.explanation.length < minValue) {
+			minValue = element.explanation.length;
+		}
+	});
+	let progress = document.querySelector('.c-progress');
+	let progressWidth =
+		((jsonObject[0].explanation.length - minValue) / (maxValue - minValue)) *
+		100;
+	progress.style.width = `${progressWidth}%`;
+	progress.innerHTML = `${Math.round(progressWidth, 0)}%`;
+
 	listenToClose();
 };
 
@@ -451,7 +469,7 @@ function onClick(event) {
 function focusNextItem() {
 	const item = document.activeElement;
 	if (item.nextElementSibling) {
-		console.log('true');
+		console.l;
 		activate(item.nextElementSibling);
 	}
 }
