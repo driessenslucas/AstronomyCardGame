@@ -1,5 +1,5 @@
 let CardsArray = [];
-let apiKey = '0wbfxSQ6gzlHNFmELg7orwZgf5cFqVzFALmBrvzH';
+
 let html = '';
 let ChosenCardnrs = [];
 let nummerOfCardNotFlipped = 0;
@@ -179,8 +179,21 @@ const checkCards = async (card1, card2) => {
 				document.querySelector('.c-restart-btn').classList.remove('c-hidden');
 				const jsConfetti = new JSConfetti();
 				jsConfetti.addConfetti({
-					//fill with space related emojis
-					emoji: ['🚀', '🌕', '🌖', '🌗', '🌘', '🌑', '🌒', '🌓', '🌔', '🌚'],
+					//fill with space related plant emojis
+
+					emojis: [
+						'🚀',
+						'🛰️',
+						'🛸',
+						'🌗',
+						'🪐',
+						'🌑',
+						'🔭',
+						'🌒',
+						'🌓',
+						'🌏',
+						'🌚',
+					],
 				});
 			}
 		} else {
@@ -219,7 +232,23 @@ const checkCards = async (card1, card2) => {
 				}`
 			);
 			if (document.querySelector('.c-playboard').children.length == 0) {
-				jsConfetti.addConfetti();
+				jsConfetti.addConfetti({
+					// emojis: [
+					// 	'🚀',
+					// 	'🛰️',
+					// 	'🛸',
+					// 	'🌗',
+					// 	'🪐',
+					// 	'🌑',
+					// 	'🔭',
+					// 	'🌒',
+					// 	'🌓',
+					// 	'🌏',
+					// 	'🌚',
+					// ],
+					confettiNumber: 300,
+				});
+
 				document.querySelector('.c-restart-btn').classList.remove('c-hidden');
 			}
 		} else {
