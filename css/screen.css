@@ -56,6 +56,7 @@
 *:before,
 *:after {
 	box-sizing: inherit;
+	scroll-padding: 0;
 }
 
 html,
@@ -786,7 +787,7 @@ body.has-mobile-nav .o-container {
 	text-align: center;
 }
 .c-bar {
-	margin: 0 auto;
+	align-self: center;
 	width: 12.5rem;
 	height: 1.25rem;
 	background-color: var(--global-fill-cardback);
@@ -796,4 +797,17 @@ body.has-mobile-nav .o-container {
 	.c-bigCard {
 		width: 29rem;
 	}
+}
+
+.c-bar-header {
+	display: flex;
+	text-align: center;
+	margin: 0 auto;
+}
+.c-bar-header__text {
+	text-align: center;
+	margin: 0;
+	font-size: small;
+	padding-right: 0.75rem;
+	font-weight: 600;
 }

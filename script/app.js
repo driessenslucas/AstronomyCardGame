@@ -53,10 +53,13 @@ const showBigCard = async function (jsonObject) {
 								d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
 							/>
 				</svg></div>
-				<div class="c-bar"><div class="c-progress"></div></div>
+				
 				<h2 class="c-title u-text-xl">${jsonObject[0].title}</h2>
         <img src="${jsonObject[0].url}" alt="" class="c-APOD" />
-        <p class="c-discription u-text-rg">${jsonObject[0].explanation}</p>`;
+        <p class="c-discription u-text-rg">${jsonObject[0].explanation}</p>
+		<div class="c-bar-header"> <h2 class="c-bar-header__text u-text-sm">explanation length:</h2>
+				<div class="c-bar"><div class="c-progress"></div></div>
+				</div>`;
 	// document.querySelector('.c-Date').innerHTML = jsonObject.date;
 	document.querySelector('.c-bigCard').innerHTML = html;
 	document.querySelector('.c-bigCard').classList.remove('c-hidden');
