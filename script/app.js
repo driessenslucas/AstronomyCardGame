@@ -178,7 +178,10 @@ const checkCards = async (card1, card2) => {
 			if (document.querySelector('.c-playboard').children.length == 0) {
 				document.querySelector('.c-restart-btn').classList.remove('c-hidden');
 				const jsConfetti = new JSConfetti();
-				jsConfetti.addConfetti();
+				jsConfetti.addConfetti({
+					//fill with space related emojis
+					emoji: ['🚀', '🌕', '🌖', '🌗', '🌘', '🌑', '🌒', '🌓', '🌔', '🌚'],
+				});
 			}
 		} else {
 			console.log('niet gelijk');
