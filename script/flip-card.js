@@ -1,5 +1,5 @@
 let CardsArray = [];
-let apiKey = '0wbfxSQ6gzlHNFmELg7orwZgf5cFqVzFALmBrvzH';
+
 let html = '';
 let ChosenCardnrs = [];
 let nummerOfCardNotFlipped = 0;
