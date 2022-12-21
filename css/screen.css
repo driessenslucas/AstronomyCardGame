@@ -33,27 +33,18 @@
 	/* radius */
 	--global-borderRadius: calc(4rem / var(--global-root-font-size));
 
-	/* Whitespace */
-	/* 
-        global font-size = 0.9375rem
-        baseline = 0.3125rem        
-        0.9375rem = 1rem
-        0.3125rem = 1rem/3
-        This would equal to 0.3333333...rem but let the browser do the math
-    */
 	--global-baseline: calc(1rem / 3);
-	--global-whitespace-xxs: var(--global-baseline); /* = 0.3125rem */
-	--global-whitespace-xs: calc(var(--global-baseline) * 2); /* = 0.625rem */
-	--global-whitespace-sm: calc(var(--global-baseline) * 3); /* = 0.9375rem */
-	--global-whitespace-md: calc(var(--global-baseline) * 4); /* = 1.25rem */
-	--global-whitespace-lg: calc(var(--global-baseline) * 5); /* = 1.5625rem */
-	--global-whitespace-xl: calc(var(--global-baseline) * 6); /* = 1.875rem */
+	--global-whitespace-xxs: var(--global-baseline);
+	--global-whitespace-xs: calc(var(--global-baseline) * 2);
+	--global-whitespace-sm: calc(var(--global-baseline) * 3);
+	--global-whitespace-md: calc(var(--global-baseline) * 4);
+	--global-whitespace-lg: calc(var(--global-baseline) * 5);
+	--global-whitespace-xl: calc(var(--global-baseline) * 6);
 
 	/* transitions */
 	--global-transition-alpha: 0.2s;
 	--global-transition-beta: 1s;
 
-	--pi: 3.14159265359;
 	-ms-overflow-style: none; /* Internet Explorer 10+ */
 	scrollbar-width: none; /* Firefox */
 }
@@ -557,7 +548,7 @@ input::placeholder {
 	transform: rotateX(0deg) rotateZ(0deg) rotateY(180deg);
 }
 .c-hand-cards__container .card {
-	background: #fff8e6;
+	background: var(--global-color-svg-white);
 	border-radius: 1vmin;
 	box-shadow: 1vmin 1vmin 2vmin rgba(0, 0, 0, 0.19),
 		1vmin 1vmin 0.5vmin rgba(0, 0, 0, 0.23);
