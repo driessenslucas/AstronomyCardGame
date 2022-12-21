@@ -21,7 +21,7 @@ const showData = function (jsonObject) {
 	shuffleArray(CardsArray);
 	let imgnr = 1;
 	for (let i = 0; i < CardsArray.length; i++) {
-		console.log(CardsArray[i]);
+		// console.log(CardsArray[i]);
 		html += `
         <div class="c-playboard__item cardnr${imgnr}" tabindex="0" ><div class="card-container c-card flipped">
 			<div class="card">
@@ -44,7 +44,7 @@ const showData = function (jsonObject) {
 };
 
 const showBigCard = async function (jsonObject) {
-	console.log(jsonObject);
+	// console.log(jsonObject);
 	let html = `<div class="o-button-reset c-nav-trigger js-close" tabindex="0"  ><svg
 					class="c-nav-trigger__svg"
 					viewBox="0 0 24 24"
@@ -117,7 +117,7 @@ const checkCardsInHand = function () {
 };
 
 const addToHand = async (ChosenCard) => {
-	console.log(ChosenCard);
+	// console.log(ChosenCard);
 	let handHtml = '';
 	let mobilenavHtml = '';
 
@@ -147,15 +147,15 @@ const addToHand = async (ChosenCard) => {
 };
 
 const checkCards = async (card1, card2) => {
-	console.log(card1);
-	console.log(card2);
+	// console.log(card1);
+	// console.log(card2);
 	const cards = document.querySelectorAll('.card-container');
 	try {
 		if (card1.url == card2.url && ChosenCardnrs[0] != ChosenCardnrs[1]) {
-			console.log('gelijk');
-			console.log(ChosenCards);
+			// console.log('gelijk');
+			// console.log(ChosenCards);
 
-			console.log(ChosenCardnrs);
+			// console.log(ChosenCardnrs);
 			// document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
 			// document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
 			await new Promise((resolve) => setTimeout(resolve, 800));
@@ -170,11 +170,11 @@ const checkCards = async (card1, card2) => {
 			ChosenCardnrs = [];
 			nummerOfCardNotFlipped = 0;
 			ChosenCards = [];
-			console.log(
-				`childeren left ${
-					document.querySelector('.c-playboard').children.length
-				}`
-			);
+			// console.log(
+			// 	`childeren left ${
+			// 		document.querySelector('.c-playboard').children.length
+			// 	}`
+			// );
 			if (document.querySelector('.c-playboard').children.length == 0) {
 				document.querySelector('.c-restart-btn').classList.remove('c-hidden');
 				const jsConfetti = new JSConfetti();
@@ -197,7 +197,7 @@ const checkCards = async (card1, card2) => {
 				});
 			}
 		} else {
-			console.log('niet gelijk');
+			// console.log('niet gelijk');
 			cards.forEach(async (card) => {
 				await new Promise((resolve) => setTimeout(resolve, 600));
 				card.classList.add('flipped');
@@ -208,10 +208,10 @@ const checkCards = async (card1, card2) => {
 		}
 	} catch {
 		if (card1.url === card2.url && ChosenCardnrs[0] != ChosenCardnrs[1]) {
-			console.log('gelijk');
-			console.log(ChosenCards);
+			// console.log('gelijk');
+			// console.log(ChosenCards);
 
-			console.log(ChosenCardnrs);
+			// console.log(ChosenCardnrs);
 			// document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
 			// document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
 			await new Promise((resolve) => setTimeout(resolve, 800));
@@ -226,11 +226,11 @@ const checkCards = async (card1, card2) => {
 			ChosenCardnrs = [];
 			nummerOfCardNotFlipped = 0;
 			ChosenCards = [];
-			console.log(
-				`childeren left ${
-					document.querySelector('.c-playboard').children.length
-				}`
-			);
+			// console.log(
+			// 	`childeren left ${
+			// 		document.querySelector('.c-playboard').children.length
+			// 	}`
+			// );
 			if (document.querySelector('.c-playboard').children.length == 0) {
 				jsConfetti.addConfetti({
 					// emojis: [
@@ -252,7 +252,7 @@ const checkCards = async (card1, card2) => {
 				document.querySelector('.c-restart-btn').classList.remove('c-hidden');
 			}
 		} else {
-			console.log('niet gelijk');
+			// console.log('niet gelijk');
 			cards.forEach(async (card) => {
 				await new Promise((resolve) => setTimeout(resolve, 600));
 				card.classList.add('flipped');
@@ -296,9 +296,9 @@ const listenToClick = () => {
 };
 
 const handleClick = async (card, i) => {
-	console.log(card);
+	// console.log(card);
 	const cards = document.querySelectorAll('.card-container');
-	console.log(nummerOfCardNotFlipped);
+	// console.log(nummerOfCardNotFlipped);
 	if (
 		nummerOfCardNotFlipped <= 1 &&
 		card.classList.contains('flipped') &&
@@ -316,7 +316,7 @@ const handleClick = async (card, i) => {
 			(word) => word.url === document.querySelector(`${imgnr}`).src
 		);
 		ChosenCards.push(result[0]);
-		console.log(ChosenCards);
+		// console.log(ChosenCards);
 		if (nummerOfCardNotFlipped == 2) {
 			await checkCards(ChosenCards[0], ChosenCards[1]);
 			nummerOfCardNotFlipped = 0;
@@ -331,7 +331,7 @@ const listenToClickHand = () => {
 			cardsInHand[index].addEventListener('click', () => {
 				let nr = index + 1;
 				let imgnr = `.c-handnr${nr}`;
-				console.log('clicked card');
+				// console.log('clicked card');
 				const result = CardsArray.filter(
 					(word) => word.url === document.querySelector(`${imgnr}`).src
 				);
@@ -351,7 +351,7 @@ const listenToClickHand = () => {
 
 const listenToClickHandMobile = () => {
 	const cardsInHand = document.querySelectorAll('.c-mobile-nav__item');
-	console.log(cardsInHand);
+	// console.log(cardsInHand);
 	cardsInHand.forEach((element) => {
 		for (let index = 0; index < cardsInHand.length; index++) {
 			cardsInHand[index].addEventListener('click', () => {
@@ -360,7 +360,7 @@ const listenToClickHandMobile = () => {
 				document.querySelector('.c-blur').classList.toggle('c-hidden');
 				let nr = index + 1;
 				let imgnr = `.c-handnr${nr}`;
-				console.log('clicked card');
+				// console.log('clicked card');
 				const result = CardsArray.filter(
 					(word) => word.url === document.querySelector(`${imgnr}`).src
 				);
@@ -379,7 +379,7 @@ const listenToClose = () => {
 	disableTabIndex(document.querySelectorAll('.c-hand-cards__container'));
 	disableTabIndex(document.querySelectorAll('.c-playboard__item'));
 	document.querySelector('.js-close').addEventListener('click', () => {
-		console.log('click');
+		// console.log('click');
 		document.querySelector('.c-bigCard').classList.add('c-hidden');
 		document.querySelector('.c-blur').classList.add('c-hidden');
 		enableTabInded(document.querySelectorAll('.c-hand-cards__container'));
@@ -401,7 +401,7 @@ const getApi = async function () {
 			let array2 = [];
 			array2.push(jsonObject);
 			CardsArray = array[0].concat(array2[0]);
-			console.log(CardsArray);
+			// console.log(CardsArray);
 			showData(jsonObject);
 		});
 };
