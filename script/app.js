@@ -177,6 +177,8 @@ const checkCards = async (card1, card2) => {
 			);
 			if (document.querySelector('.c-playboard').children.length == 0) {
 				document.querySelector('.c-restart-btn').classList.remove('c-hidden');
+				const jsConfetti = new JSConfetti();
+				jsConfetti.addConfetti();
 			}
 		} else {
 			console.log('niet gelijk');
@@ -214,6 +216,7 @@ const checkCards = async (card1, card2) => {
 				}`
 			);
 			if (document.querySelector('.c-playboard').children.length == 0) {
+				jsConfetti.addConfetti();
 				document.querySelector('.c-restart-btn').classList.remove('c-hidden');
 			}
 		} else {
@@ -422,9 +425,12 @@ function toggleNav() {
 }
 
 const reStartGame = () => {
-	document.querySelector('.c-restart-btn').addEventListener('click', () => {
-		location.reload();
-	});
+	document
+		.querySelector('.c-restart-btn')
+		.addEventListener('click', async () => {
+			await new Promise((resolve) => setTimeout(resolve, 600));
+			location.reload();
+		});
 	document
 		.querySelector('.c-restart-btn')
 		.addEventListener('keypress', (event) => {
