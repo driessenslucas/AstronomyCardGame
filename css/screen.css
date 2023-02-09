@@ -19,7 +19,7 @@
 	--global-color-neutral-x-dark: #43425d;
 	--global-color-neutral-xx-dark: #3b3b53;
 	/* Shadows */
-	--shadow-color: 0deg 0% 43%;
+	--shadow-color: 0deg 0% 20%;
 	--shadow-elevation-high: 0.0125rem 0.0125rem 0.0187rem
 			hsl(var(--shadow-color) / 0.34),
 		0.0625rem 0.0813rem 0.1125rem -0.025rem hsl(var(--shadow-color) / 0.34),
@@ -240,6 +240,7 @@ input::placeholder {
 
 .c-hidden {
 	display: none !important;
+	opacity: 0;
 }
 
 .c-img {
@@ -276,7 +277,7 @@ input::placeholder {
 .c-playboard__item.c-hide {
 	opacity: 0;
 	transform: translateY(18.75rem);
-	transition: all 0.6s ease-out;
+	transition: all 0.7s ease-out;
 }
 
 /*
@@ -751,7 +752,7 @@ input::placeholder {
 		bottom: 0rem;
 		right: 25%;
 		left: 50%;
-		margin-left: -9.375rem;
+		margin-left: -12.125rem;
 	}
 	.js-toggle-nav {
 		display: none;
@@ -810,4 +811,208 @@ body.has-mobile-nav .o-container {
 	font-size: small;
 	padding-right: 0.75rem;
 	font-weight: 600;
+}
+
+.c-start-btn {
+	display: inline-block;
+	color: #ffffff;
+	padding: 32px;
+	position: relative;
+	letter-spacing: 1px;
+}
+.btn__circle,
+.btn__text,
+.btn__white-circle {
+	position: absolute;
+}
+.btn__circle {
+	top: 0;
+	left: 0;
+	height: 100%;
+	border-radius: 100%;
+	width: 100%;
+	box-shadow: 0 0 1px 1px #fff;
+	transition: 0.3s linear;
+}
+.btn__white-circle {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0);
+	width: 56px;
+	height: 56px;
+	border-radius: 100%;
+	background: #ffffff;
+	display: flex;
+	transition: 0.3s ease-in-out;
+}
+.btn__white-circle svg {
+	width: 24px;
+	height: 24px;
+	margin: auto;
+}
+.btn__text {
+	top: 50%;
+	transform: translateY(-50%);
+	white-space: nowrap;
+	z-index: 2;
+	padding: 24px 8px;
+	transition: 0.3s linear;
+}
+.c-start-btn:hover .btn__circle {
+	transform: scale(0);
+}
+.c-start-btn:hover .btn__white-circle {
+	transform: translate(-50%, -50%) scale(1);
+}
+.c-start-btn:hover .btn__text {
+	transform: translate(40px, -50%);
+}
+
+.content {
+	background: var(--global-background-color);
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	margin-right: 50%;
+	margin-left: 25%;
+}
+@media (min-width: 800px) {
+	.content {
+		margin-right: 0;
+		margin-left: 0;
+	}
+}
+
+.c-restart-btn,
+.scene {
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-display: flex;
+	-webkit-flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	position: absolute;
+	background: var(--global-background-color);
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	justify-content: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	-webkit-align-items: center;
+}
+
+.c-restart-btn {
+	background: var(--global-background-color);
+}
+.c-restart-btn a {
+	color: white;
+	padding: 0.7em calc(0.7em * 1.2);
+	display: inline-block;
+	border: 3px solid transparent;
+	position: relative;
+	font-size: 1.5em;
+	cursor: pointer;
+	letter-spacing: 0.07em;
+}
+.c-restart-btn a .text {
+	font-family: proxima-nova, monospace;
+	transform: translate3d(0, 0.7em, 0);
+	display: block;
+	transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1) 0.4s;
+}
+.c-restart-btn a:after {
+	position: absolute;
+	content: '';
+	bottom: -3px;
+	left: calc(0.7em * 1.2);
+	right: calc(0.7em * 1.2);
+	height: 3px;
+	background: var(--global-fill-cardback);
+	transition: transform 0.8s cubic-bezier(1, 0, 0.37, 1) 0.2s,
+		right 0.2s cubic-bezier(0.04, 0.48, 0, 1) 0.6s,
+		left 0.4s cubic-bezier(0.04, 0.48, 0, 1) 0.6s;
+	transform-origin: left;
+}
+.c-restart-btn .line {
+	position: absolute;
+	background: var(--global-fill-cardback);
+}
+.c-restart-btn .line.-right,
+.c-restart-btn .line.-left {
+	width: 3px;
+	bottom: -3px;
+	top: -3px;
+	transform: scale3d(1, 0, 1);
+}
+.c-restart-btn .line.-top,
+.c-restart-btn .line.-bottom {
+	height: 3px;
+	left: -3px;
+	right: -3px;
+	transform: scale3d(0, 1, 1);
+}
+.c-restart-btn .line.-right {
+	right: -3px;
+	transition: transform 0.1s cubic-bezier(1, 0, 0.65, 1.01) 0.23s;
+	transform-origin: top;
+}
+.c-restart-btn .line.-top {
+	top: -3px;
+	transition: transform 0.08s linear 0.43s;
+	transform-origin: left;
+}
+.c-restart-btn .line.-left {
+	left: -3px;
+	transition: transform 0.08s linear 0.51s;
+	transform-origin: bottom;
+}
+.c-restart-btn .line.-bottom {
+	bottom: -3px;
+	transition: transform 0.3s cubic-bezier(1, 0, 0.65, 1.01);
+	transform-origin: right;
+}
+.c-restart-btn a:hover .text,
+.c-restart-btn a:active .text {
+	transform: translate3d(0, 0, 0);
+	transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1) 0.4s;
+}
+.c-restart-btn a:hover:after,
+.c-restart-btn a:active:after {
+	transform: scale3d(0, 1, 1);
+	right: -3px;
+	left: -3px;
+	transform-origin: right;
+	transition: transform 0.2s cubic-bezier(1, 0, 0.65, 1.01) 0.17s,
+		right 0.2s cubic-bezier(1, 0, 0.65, 1.01), left 0s 0.3s;
+}
+.c-restart-btn a:hover .line,
+.c-restart-btn a:active .line {
+	transform: scale3d(1, 1, 1);
+}
+.c-restart-btn a:hover .line.-right,
+.c-restart-btn a:active .line.-right {
+	transition: transform 0.1s cubic-bezier(1, 0, 0.65, 1.01) 0.2s;
+	transform-origin: bottom;
+}
+.c-restart-btn a:hover .line.-top,
+.c-restart-btn a:active .line.-top {
+	transition: transform 0.08s linear 0.4s;
+	transform-origin: right;
+}
+.c-restart-btn a:hover .line.-left,
+.c-restart-btn a:active .line.-left {
+	transition: transform 0.08s linear 0.48s;
+	transform-origin: top;
+}
+.c-restart-btn a:hover .line.-bottom,
+.c-restart-btn a:active .line.-bottom {
+	transition: transform 0.5s cubic-bezier(0, 0.53, 0.29, 1) 0.56s;
+	transform-origin: left;
 }

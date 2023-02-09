@@ -1,5 +1,4 @@
 let CardsArray = [];
-
 let html = '';
 let ChosenCardnrs = [];
 let nummerOfCardNotFlipped = 0;
@@ -150,40 +149,37 @@ const addToHand = async (ChosenCard) => {
 };
 
 const checkCards = async (card1, card2) => {
-	// console.log(card1);
-	// console.log(card2);
 	const cards = document.querySelectorAll('.card-container');
 	try {
 		if (card1.url == card2.url && ChosenCardnrs[0] != ChosenCardnrs[1]) {
-			// console.log('gelijk');
-			// console.log(ChosenCards);
-
-			// console.log(ChosenCardnrs);
-			// document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
-			// document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
-			await new Promise((resolve) => setTimeout(resolve, 800));
-			document
-				.querySelector('.c-playboard')
-				.removeChild(document.querySelector(ChosenCardnrs[0]));
-			document
-				.querySelector('.c-playboard')
-				.removeChild(document.querySelector(ChosenCardnrs[1]));
-			await new Promise((resolve) => setTimeout(resolve, 300));
+			// await new Promise((resolve) => setTimeout(resolve, 800));
+			// document
+			// 	.querySelector('.c-playboard')
+			// 	.removeChild(document.querySelector(ChosenCardnrs[0]));
+			// document
+			// 	.querySelector('.c-playboard')
+			// 	.removeChild(document.querySelector(ChosenCardnrs[1]));
+			// await new Promise((resolve) => setTimeout(resolve, 300));
+			document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
+			document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
 			addToHand(ChosenCards[0]);
 			ChosenCardnrs = [];
 			nummerOfCardNotFlipped = 0;
 			ChosenCards = [];
-			// console.log(
-			// 	`childeren left ${
-			// 		document.querySelector('.c-playboard').children.length
-			// 	}`
-			// );
-			if (document.querySelector('.c-playboard').children.length == 0) {
+			//check if all children contain classlist c-hide
+			//if so, show win screen
+			let allCards = document.querySelectorAll('.c-playboard__item');
+			let allCardsHidden = true;
+			allCards.forEach((card) => {
+				if (!card.classList.contains('c-hide')) {
+					allCardsHidden = false;
+				}
+			});
+			console.log(allCardsHidden);
+			if (allCardsHidden) {
 				document.querySelector('.c-restart-btn').classList.remove('c-hidden');
 				const jsConfetti = new JSConfetti();
 				jsConfetti.addConfetti({
-					//fill with space related plant emojis
-
 					emojis: [
 						'🚀',
 						'🛰️',
@@ -200,7 +196,6 @@ const checkCards = async (card1, card2) => {
 				});
 			}
 		} else {
-			// console.log('niet gelijk');
 			cards.forEach(async (card) => {
 				await new Promise((resolve) => setTimeout(resolve, 600));
 				card.classList.add('flipped');
@@ -211,29 +206,21 @@ const checkCards = async (card1, card2) => {
 		}
 	} catch {
 		if (card1.url === card2.url && ChosenCardnrs[0] != ChosenCardnrs[1]) {
-			// console.log('gelijk');
-			// console.log(ChosenCards);
-
-			// console.log(ChosenCardnrs);
-			// document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
-			// document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
 			await new Promise((resolve) => setTimeout(resolve, 800));
-			document
-				.querySelector('.c-playboard')
-				.removeChild(document.querySelector(ChosenCardnrs[0]));
-			document
-				.querySelector('.c-playboard')
-				.removeChild(document.querySelector(ChosenCardnrs[1]));
-			await new Promise((resolve) => setTimeout(resolve, 300));
+			document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
+			document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
+			// await new Promise((resolve) => setTimeout(resolve, 800));
+			// document
+			// 	.querySelector('.c-playboard')
+			// 	.removeChild(document.querySelector(ChosenCardnrs[0]));
+			// document
+			// 	.querySelector('.c-playboard')
+			// 	.removeChild(document.querySelector(ChosenCardnrs[1]));
+			// await new Promise((resolve) => setTimeout(resolve, 300));
 			addToHand(ChosenCards[0]);
 			ChosenCardnrs = [];
 			nummerOfCardNotFlipped = 0;
 			ChosenCards = [];
-			// console.log(
-			// 	`childeren left ${
-			// 		document.querySelector('.c-playboard').children.length
-			// 	}`
-			// );
 			if (document.querySelector('.c-playboard').children.length == 0) {
 				jsConfetti.addConfetti({
 					// emojis: [
@@ -460,14 +447,21 @@ function toggleNav() {
 }
 
 const reStartGame = () => {
+	document.querySelector('.js-restart').addEventListener('click', async () => {
+		await new Promise((resolve) => setTimeout(resolve, 300));
+		CardsArray = [];
+		html = '';
+		ChosenCardnrs = [];
+		nummerOfCardNotFlipped = 0;
+		document.querySelector('.js-restart').classList.add('c-hidden');
+		document.querySelector('.c-cards').innerHTML = '';
+		document.querySelector('.c-card__nav').innerHTML = '';
+		getApi();
+		reStartGame();
+	});
+
 	document
-		.querySelector('.c-restart-btn')
-		.addEventListener('click', async () => {
-			await new Promise((resolve) => setTimeout(resolve, 600));
-			location.reload();
-		});
-	document
-		.querySelector('.c-restart-btn')
+		.querySelector('.js-restart')
 		.addEventListener('keypress', (event) => {
 			if (event.key === 'Enter') {
 				event.target.click();
@@ -476,8 +470,15 @@ const reStartGame = () => {
 };
 
 const init = () => {
-	getApi();
-	reStartGame();
+	document.querySelector('.c-start-btn').addEventListener('click', async () => {
+		// console.log('click');
+		await new Promise((resolve) => setTimeout(resolve, 150));
+		document.querySelector('.js-start').classList.add('c-hidden');
+		document.querySelector('.js-main').classList.remove('c-hidden');
+
+		getApi();
+		reStartGame();
+	});
 };
 
 document.addEventListener('DOMContentLoaded', () => {
