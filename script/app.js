@@ -195,6 +195,7 @@ const checkCards = async (card1, card2) => {
 						'🌚',
 					],
 				});
+				document.querySelector('.c-playboard').classList.remove('has-cards');
 			}
 		} else {
 			cards.forEach(async (card) => {
@@ -241,6 +242,7 @@ const checkCards = async (card1, card2) => {
 				});
 
 				document.querySelector('.c-restart-btn').classList.remove('c-hidden');
+				document.querySelector('.c-playboard').classList.remove('has-cards');
 			}
 		} else {
 			// console.log('niet gelijk');
@@ -449,7 +451,7 @@ function toggleNav() {
 
 const reStartGame = () => {
 	document.querySelector('.js-restart').addEventListener('click', async () => {
-		await new Promise((resolve) => setTimeout(resolve, 300));
+		await new Promise((resolve) => setTimeout(resolve, 100));
 		CardsArray = [];
 		html = '';
 		ChosenCardnrs = [];
