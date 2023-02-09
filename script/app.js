@@ -163,6 +163,7 @@ const checkCards = async (card1, card2) => {
 			document.querySelector(ChosenCardnrs[1]).classList.add('c-hide');
 			document.querySelector(ChosenCardnrs[0]).classList.add('c-hide');
 			addToHand(ChosenCards[0]);
+			document.querySelector('.c-playboard').classList.add('has-cards');
 			ChosenCardnrs = [];
 			nummerOfCardNotFlipped = 0;
 			ChosenCards = [];
