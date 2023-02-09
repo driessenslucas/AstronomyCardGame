@@ -798,6 +798,20 @@ body.has-mobile-nav .o-container {
 	.c-bigCard {
 		width: 29rem;
 	}
+	.c-playboard__item {
+		transform: scale(1.2);
+	}
+	.c-cards {
+		transform: scale(1.2);
+	}
+}
+@media (min-width: 900px) {
+	.c-playboard__item {
+		transform: scale(1.4);
+	}
+	.c-cards {
+		transform: scale(1.4);
+	}
 }
 
 .c-bar-header {
