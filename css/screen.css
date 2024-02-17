@@ -947,6 +947,7 @@ body.has-mobile-nav .o-container {
 	font-size: 1.5em;
 	cursor: pointer;
 	letter-spacing: 0.07em;
+	z-index: 9999;
 }
 .c-restart-btn a .text {
 	font-family: proxima-nova, monospace;
